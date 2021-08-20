@@ -1,7 +1,7 @@
 name: telegram recommend yotas issues
 on:
   schedule:
-    - cron: "* * * * *"
+    - cron: "30 17 * * 5"
 
 jobs:
   build:
@@ -16,10 +16,7 @@ jobs:
       - name: get yotas issues
         shell: bash
         run: |
-          GITHUB_TOKEN=${{ secrets.BOT_GITHUB_TOKEN }} ./get_yotas_issues.sh > yotas_issues_message \
-          && echo 'YOTAS_ISSUES_MESSAGE <<EOF' >> $GITHUB_ENV
-          cat yotas_issues_message >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
+          GITHUB_TOKEN=${{ secrets.BOT_GITHUB_TOKEN }} ./get_yotas_issues.sh > yotas_issues_message
 
       - name: send custom message with args
         uses: appleboy/telegram-action@master
