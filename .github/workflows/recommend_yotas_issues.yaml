@@ -23,4 +23,4 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
         token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        args: ${{ env.YOTAS_ISSUES_MESSAGE }}
+        message: ${{ env.YOTAS_ISSUES_MESSAGE }}
