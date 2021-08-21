@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: get yotas issues
+      - name: get contribution report
         shell: bash
         run: |
           GITHUB_TOKEN=${{ secrets.BOT_GITHUB_TOKEN }} ./get_contribution_report.sh > contributions_report_message

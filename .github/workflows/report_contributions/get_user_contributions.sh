@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #get_org_repos print out organisation list of repositories
 #param: organisation name
