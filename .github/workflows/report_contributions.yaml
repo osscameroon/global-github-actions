@@ -1,7 +1,7 @@
 name: telegram github contribution report
 on:
   schedule:
-    - cron: "* * * * *"
+    - cron: "30 8 27 * *"
 
 jobs:
   build:
@@ -28,15 +28,15 @@ jobs:
       - name: send contribution report to osscameroon channel
         uses: appleboy/telegram-action@master
         with:
-#           to: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
-          to: ${{ secrets.TELEGRAM_TEST_CHAT_ID }}
+          to: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           format: MarkdownV2
           message_file: ./.github/workflows/report_contributions/contributions_report_message
 
-#       - name: send contribution report to osscameroon group
-#         uses: appleboy/telegram-action@master
-#         with:
-#           to: ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }}
-#           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-#           message_file: ./.github/workflows/report_contributions/contributions_report_message
+      - name: send contribution report to osscameroon group
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          format: MarkdownV2
+          message_file: ./.github/workflows/report_contributions/contributions_report_message
