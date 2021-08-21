@@ -31,6 +31,7 @@ jobs:
 #           to: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
           to: ${{ secrets.TELEGRAM_TEST_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          format: MarkdownV2
           message_file: ./.github/workflows/report_contributions/contributions_report_message
 
 #       - name: send contribution report to osscameroon group
