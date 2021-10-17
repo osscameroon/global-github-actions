@@ -6,8 +6,8 @@ set -e
 echo $(curl -s 'https://opencollective.com/osscameroon.json') > opencollective_info.json
 
 # We parse and extract datas...
-balance=$(($(cat opencollective_info.json | jq -r '.balance')/10))
-yearlyIncome=$(($(cat opencollective_info.json | jq -r '.yearlyIncome')/10))
+balance=$(($(cat opencollective_info.json | jq -r '.balance')/100))
+yearlyIncome=$(($(cat opencollective_info.json | jq -r '.yearlyIncome')/100))
 backersCount=$(cat opencollective_info.json | jq -r '.backersCount')
 
 
