@@ -1,7 +1,7 @@
 name: telegram github opencollective report
 on:
   schedule:
-    - cron: "0 13 * * *"
+    - cron: "0 13 26 * *"
 
 jobs:
   build:
