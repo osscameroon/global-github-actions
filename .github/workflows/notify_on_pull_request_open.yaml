@@ -22,6 +22,6 @@ jobs:
       - name: send contribution report to osscameroon channel
         uses: appleboy/telegram-action@master
         with:
-          to: ${{ secrets.TELEGRAM_TEST_CHAT_ID }}
+          to: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message_file: ./.github/workflows/notify_on_pull_request_open/notify_on_pull_request_open_message
