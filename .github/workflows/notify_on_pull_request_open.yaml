@@ -9,7 +9,7 @@ jobs:
   notify:
     defaults:
       run:
-        working-directory: ./.github/workflows/report_contributions
+        working-directory: ./.github/workflows/notify_on_pull_request_open
 
     name: notify
     runs-on: ubuntu-latest
@@ -18,8 +18,7 @@ jobs:
       - name: get contribution report
         shell: bash
         run: |
-          cat $GITHUB_EVENT_PATH; echo ""
-          echo ${{ env.GITHUB_EVENT_PATH }}
+          ./build_pull_request_notification.sh $GITHUB_EVENT_PATH
 #           GITHUB_TOKEN=${{ secrets.BOT_GITHUB_TOKEN }} ./get_contribution_report.sh > contributions_report_message
 #       - name: send contribution report to osscameroon channel
 #         uses: appleboy/telegram-action@master
