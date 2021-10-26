@@ -24,5 +24,4 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TEST_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          format: MarkdownV2
           message_file: ./.github/workflows/notify_on_pull_request_open/notify_on_pull_request_open_message
