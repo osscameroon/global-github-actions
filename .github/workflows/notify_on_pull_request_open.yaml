@@ -1,9 +1,9 @@
-name: notify of pull_request creation 
+name: notify of pull_request creation
 on:
   pull_request:
     types: [ opened ]
-  branches:
-    - main
+    branches:
+      - main
 
 jobs:
   notify:
