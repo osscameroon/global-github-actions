@@ -9,6 +9,8 @@ USER=$(cat $FILE | jq '.sender.login' -r)
 
 echo "A new pull request was submitted by $USER"
 echo "Please check it out here $LINK"
+echo "And feel free to review it"
 echo ""
 echo "Title: $TITLE"
-echo "Description: $DESCRIPTION"
+echo "Description: "
+echo "$DESCRIPTION"
