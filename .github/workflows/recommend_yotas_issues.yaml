@@ -19,14 +19,14 @@ jobs:
           GITHUB_TOKEN=${{ secrets.BOT_GITHUB_TOKEN }} ./get_yotas_issues.sh > yotas_issues_message
 
       - name: send custom message with to osscameroon channel
-        uses: appleboy/telegram-action@master
+        uses: appleboy/telegram-action@v0.1.1
         with:
           to: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message_file: ./.github/workflows/recommend_yotas_issues/yotas_issues_message
 
       - name: send custom message with to osscameroon group
-        uses: appleboy/telegram-action@master
+        uses: appleboy/telegram-action@v0.1.1
         with:
           to: ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
