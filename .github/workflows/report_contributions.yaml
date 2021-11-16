@@ -26,7 +26,7 @@ jobs:
           GITHUB_TOKEN=${{ secrets.BOT_GITHUB_TOKEN }} ./get_contribution_report.sh > contributions_report_message
 
       - name: send contribution report to osscameroon channel
-        uses: appleboy/telegram-action@master
+        uses: appleboy/telegram-action@v0.1.1
         with:
           to: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -34,7 +34,7 @@ jobs:
           message_file: ./.github/workflows/report_contributions/contributions_report_message
 
       - name: send contribution report to osscameroon group
-        uses: appleboy/telegram-action@master
+        uses: appleboy/telegram-action@v0.1.1
         with:
           to: ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
