@@ -43,10 +43,10 @@ echo "Thanks to our fantastics donators :"
 echo ""
 printf '+ %s +\n' "${donator_list[@]}" | sort -u
 echo ""
-echo "Huge Thanks for donations, trust and support 🥳🙇🙏 !!!"
+echo "Huge Thanks for donations, trust and support 🥳🙇🙏 \!\!\!"
 echo ""
 echo "If you want to contribute too, feel free to donate here : https://opencollective.com/osscameroon \!"
-echo "There is no 'small money', each donation count a lot😉!"
+echo "There is no 'small money', each donation count a lot😉\!"
 echo ""
 echo "Full details about transactions, expenses... available here : https://opencollective.com/osscameroon/transactions"
 
