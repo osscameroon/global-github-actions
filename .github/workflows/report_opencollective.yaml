@@ -1,5 +1,9 @@
 name: telegram github opencollective report
 on:
+  pull_request:
+    types: [ opened ]
+    branches:
+      - main
   schedule:
     - cron: "0 13 26 * *"
 
