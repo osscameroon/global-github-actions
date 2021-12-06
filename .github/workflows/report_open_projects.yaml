@@ -1,0 +1,33 @@
+name: telegram github open projects report
+on: [push]
+
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: ./.github/workflows/report_open_projects
+
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: get contribution report
+        shell: bash
+        run: |
+          ./get_open_projects.sh > open_projects_message
+
+      - name: send open projects report to osscameroon channel
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          format: MarkdownV2
+          message_file: ./.github/workflows/report_open_projects/open_projects_message
+
+      - name: send open projects report to osscameroon group
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          format: MarkdownV2
+          message_file: ./.github/workflows/report_open_projects/open_projects_message
