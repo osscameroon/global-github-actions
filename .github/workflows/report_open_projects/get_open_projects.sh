@@ -27,14 +27,14 @@ generate_msg(){
             body=$(echo "$body" | tr \# \& | tr \' ,)
             printf "$body"
             echo "..."
-            echo "Reactions: $reactions"
-            echo "Comments: $comments"
+            echo "✋🏾: $reactions"
+            echo "💬: $comments"
             
             echo "\`\`\`"
 
-            echo "[Check it here]($url)"
+            echo "[------------CHECK HERE------------]($url)"
             echo ""
-            echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            echo ""
         done
 
         if [[ -z "$ret" ]]; then
@@ -55,8 +55,9 @@ echo ""
 echo "😎 Helloooooo \\!"
 echo ""
 echo "This is the list of great ideas/projects pending in OssCameroun :"
+echo ""
 generate_msg
-echo "You can choose an idea, contribute in the chat with you ideas or exchange with others \\!"
+echo "You can choose an idea, contribute in the chat with your ideas or exchange with others \\!"
 echo "If you have a project or an idea in mind, anything \\!"
 echo "Feel free to create an issue [HERE](https://github.com/osscameroon/Open-Projects/issues), a provided template is available for you \\!"
 echo "" #for telegram format
