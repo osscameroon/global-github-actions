@@ -1,0 +1,17 @@
+name: telegram github quiz
+on: [push]
+
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: ./.github/workflows/report_quiz
+
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Send Quiz message to the channel
+        shell: bash
+        run: |
+          ./report_quiz.sh ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }} ${{ secrets.TELEGRAM_BOT_TOKEN }} ${{ secrets.QUIZAPI_KEY }}
