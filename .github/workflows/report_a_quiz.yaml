@@ -1,7 +1,8 @@
 name: telegram github quiz
 on: 
   schedule:
-    - cron: "0 10 * * *"
+    - cron: "0 */10 * * *"
+    # Each 10hours to have at least 2 quiz questions per day (24h)
 
 jobs:
   build:
