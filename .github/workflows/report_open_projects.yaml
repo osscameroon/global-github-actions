@@ -1,7 +1,7 @@
 name: telegram github open projects report
 on:
   schedule:
-    - cron: "0 13 15 * *"
+      - cron: "0 13 15 * *"
 
 jobs:
   build:
