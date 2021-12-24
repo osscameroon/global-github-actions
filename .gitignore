@@ -1,0 +1,22 @@
+.history
+.idea
+.vscode
+*__pycache__
+*.pyc
+*venv
+.secrets
+
+#vim
+.*sw*
+.vim
+
+# miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.ds_store
+.atom/
+.buildlog/
+.history
+.svn/
