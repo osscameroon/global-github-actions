@@ -9,6 +9,7 @@ jobs:
       run:
         working-directory: ./.github/workflows/social_media_message_scheduler
 
+    name: Send message
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -25,6 +26,5 @@ jobs:
           make install-deps
 
       - name: send message
-        shell: bash
         run: |
           make run

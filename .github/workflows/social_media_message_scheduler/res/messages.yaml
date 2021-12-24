@@ -1,0 +1,58 @@
+# the message name or id
+- submit_project_ideas:
+  #the list of target describes where you want your message to be sent it can be
+  # <twitter OR telegram_group OR telegram_channel >
+  targets:
+    - twitter
+  message: |
+    Hi all,
+
+    You have a project idea you think the Cameroonian community might benefit from ?
+
+    You can submit this idea to the osscameroon community and we can work on it together.
+
+    Click here to submit Down pointing backhand index
+    https://github.com/osscameroon/Open-Projects/issues/new?assignees=&labels=&template=project-idea-template.md&title=
+
+    Join us here https://t.me/joinchat/UpKZh_KXTaTx7JD7
+
+    #CaParleDev
+
+- bash_tutorial:
+  targets:
+    - twitter
+  message: |
+    Apprendre Bash avec
+    @elhmne
+    en contribuant au tutoriel "How to h4ck a h4cker(https://youtube.com/watch?v=wGDUTx5zdeU&t=13s)" de
+    @sanixdarker
+    #CaParleDev
+    #DEVCommunity
+
+- first_contribution:
+  targets:
+    - telegram_group
+    - telegram_channel
+  message: |
+    Hope you are working on some fun projects, this weekend.
+
+    In case you don't know what to work on or would like to try something new, you can make your first contribution to an open
+    source project.
+
+    This tutorial will help you starting 👇
+     https://www.youtube.com/watch?v=F1SG2Zfzn-U&list=PLYfuyzVpgjOSqTcwvb7WGMZrLrEqZl2rB
+
+- promote_camerapps:
+  targets:
+    - telegram_channel
+    - telegram_group
+    - twitter
+  message: |
+    Bonjour à tous et à toutes,
+
+    Découvrez ce catalogue d'applications, de jeux videos et de communautés Camerounaises
+    Right pointing backhand index https://camerapps.com
+
+    Rajoutez vous aussi des applications et gagnez des Yotas, en suivant ce tutoriel
+    Bonne contribution
+    #CaParleDev
