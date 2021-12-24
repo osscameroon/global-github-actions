@@ -1,0 +1,30 @@
+name: social media message scheduler
+on:
+  schedule:
+    - cron: "30 17 * * 5"
+
+jobs:
+  send-message:
+    defaults:
+      run:
+        working-directory: ./.github/workflows/social_media_message_scheduler
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install virtualenv
+          make install-deps
+
+      - name: send message
+        shell: bash
+        run: |
+          make run
