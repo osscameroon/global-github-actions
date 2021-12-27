@@ -25,10 +25,9 @@ def publish_messages(messages):
 
     for message in messages:
         if "targets" in message:
-            # make sure that we uniq element per target
+            # make sure that we have uniq element per target
             targets = set(message["targets"])
             print(targets)
-
             for target in targets:
                 if target in func_publishers:
                     func_publishers[target](message)
@@ -38,4 +37,3 @@ def publish_messages(messages):
 if __name__ == "__main__":
     messages = get_messages()
     publish_messages(messages)
-#     print(messages)

@@ -1,3 +1,6 @@
+include .secret-env
+export $(shell sed 's/=.*//' .secret-env)
+
 .DEFAULT_GOAL=help
 
 VENVPATH=venv
