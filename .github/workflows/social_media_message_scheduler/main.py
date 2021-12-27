@@ -1,7 +1,10 @@
 import yaml
+import os
+import random
 from twitter import twitter_publisher
 from telegram import telegram_group_publisher, telegram_channel_publisher
 
+run_number = int(os.getenv("run_number"))
 MESSAGE_FILE = "./res/messages.yaml"
 
 func_publishers = {
@@ -23,18 +26,24 @@ def publish_messages(messages):
     if messages is None:
         raise Exception("Error: No messages found!")
 
-    for message in messages:
-        if "targets" in message:
-            # make sure that we have uniq element per target
-            targets = set(message["targets"])
-            print("targets:", targets)
-            for target in targets:
-                if target in func_publishers:
-                    try:
-                        func_publishers[target](message)
-                    except Exception as exc:
-                        print(exc)
-            print("\n")
+    # get a message index that depends on the run_number
+    size = len(messages)
+    n = list(range(0, size))
+    seed = run_number - (run_number % size)
+    random.Random(seed).shuffle(n)
+    message = messages[n[run_number % size]]
+
+    if "targets" in message:
+        # make sure that we have uniq element per target
+        targets = set(message["targets"])
+        print("targets:", targets)
+        for target in targets:
+            if target in func_publishers:
+                try:
+                    func_publishers[target](message)
+                except Exception as exc:
+                    print(exc)
+        print("\n")
 
 
 if __name__ == "__main__":
