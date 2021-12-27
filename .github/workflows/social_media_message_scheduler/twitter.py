@@ -11,10 +11,24 @@ auth.set_access_token(api_key, api_secret)
 api = tweepy.API(auth)
 
 
-def twitter_publisher(message):
-    if message is None:
-        print("Error message not found")
-    text = message["message"]
+def post_tweet(text):
     print("Twitter publisher: \n", text)
     print("Lenght: ", len(text))
     api.update_status(text)
+
+
+def twitter_publisher(message):
+    if message is None:
+        raise Exception("Error message not found")
+
+    if "message" in message:
+        text = message["message"]
+        post_tweet(text)
+    else:
+        if "message-en" in message:
+            text = message["message-en"]
+            post_tweet(text)
+
+        if "message-fr" in message:
+            text = message["message-fr"]
+            post_tweet(text)

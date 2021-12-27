@@ -4,7 +4,7 @@
   # <twitter OR telegram_group OR telegram_channel >
   targets:
     - twitter
-  message: |
+  message-en: |
     Hi all,
     You have a project idea you think the Cameroonian community might benefit from ?
     You can submit this idea to the osscameroon community and we can work on it together.
@@ -14,11 +14,20 @@
 
     Join us here https://bit.ly/3EAdKbY
     #CaParleDev
+  message-fr: |
+    Vous avez une idee de projet utile a la population Cameroonaise ?
+    Soumettez votre projet a la communautés osscameroon.
+
+    Soumettez votre projet ici
+    https://bit.ly/3EukxDZ
+
+    Nous rejoindre https://bit.ly/3EAdKbY
+    #CaParleDev
 
 - bash_tutorial:
   targets:
     - twitter
-  message: |
+  message-fr: |
     Apprendre Bash avec
     @elhmne
     en contribuant au tutoriel "How to h4ck a h4cker(https://youtube.com/watch?v=wGDUTx5zdeU&t=13s)" de
@@ -44,12 +53,21 @@
     - telegram_channel
     - telegram_group
     - twitter
-  message: |
+  message-fr: |
     Bonjour à tous et à toutes,
 
     Découvrez ce catalogue d'applications, de jeux videos et de communautés Camerounaises
     https://camerapps.com
 
     Rajoutez vous aussi des applications et gagnez des Yotas, en suivant ce tutoriel
-    Bonne contribution
+    https://bit.ly/3Ha6cym
+    #CaParleDev
+  message-en: |
+    Hi folks,
+
+    Checkout this catalogue of applications, videogames and Cameroonian communities
+    https://camerapps.com
+
+    You can add your own apps by following this tutorial
+    https://bit.ly/3Ha6cym
     #CaParleDev
