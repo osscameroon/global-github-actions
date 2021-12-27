@@ -21,7 +21,7 @@ def get_messages():
 
 def publish_messages(messages):
     if messages is None:
-        print("Error: No messages found!")
+        raise Exception("Error: No messages found!")
 
     for message in messages:
         if "targets" in message:
@@ -30,7 +30,10 @@ def publish_messages(messages):
             print(targets)
             for target in targets:
                 if target in func_publishers:
-                    func_publishers[target](message)
+                    try:
+                        func_publishers[target](message)
+                    except Exception as exc:
+                        print(exc)
             print("\n")
 
 
