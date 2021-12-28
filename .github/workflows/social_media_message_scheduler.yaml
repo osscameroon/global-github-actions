@@ -2,8 +2,6 @@ name: social media message scheduler
 on:
   schedule:
     - cron: "30 17 * * 5"
-  #please remove this after you have done your tests
-  pull_request:
 
 jobs:
   send-message:
