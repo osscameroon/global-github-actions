@@ -1,5 +1,8 @@
-include .secret-env
-export $(shell sed 's/=.*//' .secret-env)
+ENVFILE=.secret-env
+ifneq ("$(wildcard $(ENVFILE))","")
+	include .secret-env
+	export $(shell sed 's/=.*//' $(ENVFILE))
+endif
 
 .DEFAULT_GOAL=help
 
