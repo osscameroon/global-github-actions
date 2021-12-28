@@ -39,6 +39,7 @@
   targets:
     - telegram_group
     - telegram_channel
+    - twitter
   message: |
     Hope you are working on some fun projects, this weekend.
 
