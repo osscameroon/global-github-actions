@@ -1,7 +1,7 @@
 name: social media message scheduler
 on:
   schedule:
-    - cron: "0 9,6 * * *"
+    - cron: "0 9,19 * * *"
 
 jobs:
   send-message:
