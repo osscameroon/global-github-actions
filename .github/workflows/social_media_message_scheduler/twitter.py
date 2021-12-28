@@ -22,14 +22,12 @@ def twitter_publisher(message):
     if message is None:
         raise Exception("Error message not found")
 
+    text = None
     if "message" in message:
         text = message["message"]
-        post_tweet(text)
     else:
         if "message-en" in message:
             text = message["message-en"]
-            post_tweet(text)
-
         if "message-fr" in message:
             text = message["message-fr"]
-            post_tweet(text)
+    post_tweet(text)
