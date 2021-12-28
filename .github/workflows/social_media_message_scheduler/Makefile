@@ -21,10 +21,15 @@ $(VENVPATH)/bin/activate: requirements.txt
 .PHONY: install-deps
 install-deps: venv
 
-##run: run the api locally
+##run: run the message scheduler
 .PHONY: run
 run: install-deps
 	$(PYTHON) main.py
+
+##validate: validate messages
+.PHONY: validate
+validate: install-deps
+	$(PYTHON) validate.py
 
 .PHONY: lint
 lint: venv
