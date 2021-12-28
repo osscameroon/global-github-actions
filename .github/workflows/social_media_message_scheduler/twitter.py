@@ -12,9 +12,10 @@ api = tweepy.API(auth)
 
 
 def post_tweet(text):
-    print("Twitter publisher: \n", text)
-    print("Lenght: ", len(text))
-    api.update_status(text)
+    if text:
+        print("Twitter publisher: \n", text)
+        print("Lenght: ", len(text))
+        api.update_status(text)
 
 
 def twitter_publisher(message):
