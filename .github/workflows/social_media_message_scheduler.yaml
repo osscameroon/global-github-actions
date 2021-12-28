@@ -2,6 +2,8 @@ name: social media message scheduler
 on:
   schedule:
     - cron: "30 17 * * 5"
+  #please remove this after you have done your tests
+  pull_request:
 
 jobs:
   send-message:
@@ -26,5 +28,12 @@ jobs:
           make install-deps
 
       - name: send message
+        env:
+          consumer_key: ${{ secrets.TWITTER_CONSUMER_KEY }}
+          consumer_secret: ${{ secrets.TWITTER_CONSUMER_SECRET }}
+          api_key: ${{ secrets.TWITTER_TEST_API_KEY }}
+          api_secret: ${{ secrets.TWITTER_TEST_API_SECRET }}
+          run_number: ${{ github.run_number }}
+
         run: |
           make run
