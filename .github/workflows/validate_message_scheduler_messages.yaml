@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - .github/workflows/social_media_message_scheduler
+      - .github/workflows/social_media_message_scheduler/**
       - .github/workflows/validate_message_scheduler_messages.yaml
 
 jobs:
