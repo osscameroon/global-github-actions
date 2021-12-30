@@ -172,3 +172,16 @@
     and leave us a coffee
     https://opencollective.com/osscameroon
     #CaParleDev
+
+- write_a_blog:
+  targets:
+    - twitter
+    - telegram_channel
+
+  message-en:
+    You recently learned something new or built something fun ?
+    Share that with the osscameroon community by writing a blog article.
+
+    This issue will help you get started
+    https://github.com/osscameroon/osscameroon-blog/issues/22
+    #CaParleDev
