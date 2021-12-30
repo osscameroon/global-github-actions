@@ -43,9 +43,10 @@ printf ' %s \n' "${donator_list[@]}" | sort -u
 echo ""
 echo "Huge Thanks for donations, trust and support 🥳🙇🙏 \\!\\!\\!"
 echo ""
-echo "If you want to contribute too, feel free to donate here : `opencollective.com/osscameroon`"
+echo "If you want to contribute too, feel free to donate here : \`opencollective.com/osscameroon\`"
 echo "There is no 'small money', each donation count a lot"
 echo ""
-echo "Full details about transactions, expenses available here : `opencollective.com/osscameroon/transactions`"
+echo "Full details about transactions, expenses available here : \`opencollective.com/osscameroon/transactions\`"
 
-echo "" #for telegram format
+echo "" #for telegram formatll
+
