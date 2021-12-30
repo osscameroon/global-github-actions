@@ -32,8 +32,8 @@ send_poll(){
 ret=$(get_quiz_questions_answers)
 echo $ret | jq -r '[.question, .A, .B, .C, .D, .E] | @tsv' | \
 while IFS=$'\t' read -r question A B C D E; do
-    send_message $CHAT_ID "👨🏾‍💻 Quiz time !?\n\nQ: $question \n#oss_quiz_time"
-    send_message $CHAT_ID "\nA: $A\nB: $B\nC: $C\nD: $D\nE: $E\n\n#oss_quiz_time"
+    send_message $CHAT_ID "👨🏾‍💻 Quiz time !?\n\nQ: ${question:q} \n#oss_quiz_time"
+    send_message $CHAT_ID "\nA: ${A:q}\nB: ${B:q}\nC: ${C:q}\nD: ${D:q}\nE: ${E:q}\n\n#oss_quiz_time"
     send_poll $CHAT_ID
     send_message $CHAT_ID "😇 It is allowed to discuss about it in the chat and exchange with others on what you think about it !\n\n#oss_quiz_time"
 done
