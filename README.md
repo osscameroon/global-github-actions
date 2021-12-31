@@ -13,4 +13,8 @@ All github actions that we run for the entire github organisation
 - [report_number_of_yotas](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/notify_on_pull_request_open.yaml)
     Send yotas amount per developers in the organisation.
 - [report_opencollective](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/notify_on_pull_request_open.yaml)
-    Send opencollective contribution for donations to the telegram group/channel of OssCameroon.
+    Send opencollective contributions for donations to the telegram group/channel of OssCameroon.
+- [report_quiz](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/report_a_quiz.yaml)
+    A quiz bot that will print some quiz questions with options in the telegram chat group.
+- [social_media_message_scheduler](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/social_media_message_scheduler.yaml)
+    A github action to schedule messages on twitter, telegram
