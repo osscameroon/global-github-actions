@@ -2,14 +2,19 @@
 
 set -e
 
+# just to randomize the sort element, so that we have sometimes
+# sorted by comments or sometimes sorted by reactions
+sort_element=("comments" "reactions")
+rand=$[$RANDOM % ${#sort_element[@]}]
+
 #get_repository_issues print out organisation list of repositories
 # param: repository name
 get_open_projects_issues() {
 	page=$1
     repo=https://api.github.com/repos/osscameroon/Open-Projects
 	curl -H "Accept: application/vnd.github.v3+json" \
-    $repo/issues\?sort=comments\&direction=desc\&state\=open\&per_page\=100\&page\=$page 2>/dev/null | \
-    jq '[limit(7;.[])] | .[] | {url: .url, user: .user.login, body: .body[0:200], comments: .comments, reactions: .reactions.total_count, c: .total_count}'
+    $repo/issues\?sort=${sort_element[$rand]}\&direction=desc\&state\=open\&per_page\=10\&page\=$page 2>/dev/null | \
+    jq '[limit(7;.[])] | .[] | {url: .url, user: .user.login, body: .body[0:300], comments: .comments, reactions: .reactions.total_count, c: .total_count}'
 }
 
 generate_msg(){
@@ -21,15 +26,13 @@ generate_msg(){
 
         echo $ret | jq -r '[.url, .user, .body, .reactions, .comments] | @tsv' | \
         while IFS=$'\t' read -r url user body reactions comments; do
-            echo "\`\`\`"
-            echo "By: $user 💡"
+            echo " \`\`\`"
+            echo "by $user 💡"
             body=$(echo "$body" | tr \# \& | tr \' ,)
             printf "$body"
-            echo "\`\`\`"
-            echo "\\\.\\\.\\.[MORE_HERE]($url)"
-            echo "reactions✋🏾\\: $reactions"
-            echo "comments💬\\: $comments"
-            echo ""
+            echo " ...\`\`\`"
+            echo "✋🏾reactions\\: $reactions"
+            echo "💬comments\\: $comments"
             echo ""
         done
 
@@ -50,13 +53,12 @@ echo ""
 echo "Open Ideas/Projects report"
 echo ""
 echo ""
-echo "😎 Helloooo \\!"
+echo "😎 Helloooo genius people \\!"
 echo ""
 echo "This is the list of great ideas/projects pending in OssCameroun \\:"
-echo ""
 generate_msg
 echo "Don t forget, you can \\:"
-echo "\\>  Choose an idea, contribute in the chat with your ideas or exchange with others \\!"
-echo "\\>  Create your issue as a  project you have in mind \\!"
-echo "Feel free to create an issue [HERE](https://github.com/osscameroon/Open-Projects/issues), a provided template is available for you \\!"
+echo "\\>  Choose an idea, contribute in the chat or exchange with others \\!"
+echo "\\>  Create your issue as a project you have in mind \\!"
+echo "Feel free to create an idea \\(a provided template is available\\) or just read more [HERE](https://github.com/osscameroon/Open-Projects/issues) \\!"
 echo "" #for telegram format
