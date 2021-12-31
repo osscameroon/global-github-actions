@@ -9,7 +9,10 @@ QUIZAPI_KEY=$3
 
 # To escapes some stupid quotes
 escp(){
-    echo -e "$(printf '%q' $1)"
+    if [[ ${#2} -gt 1 ]]
+    then
+        echo "$1 $(printf '%q' $2)\""
+    fi
 }
 
 # to fetch programming questions
@@ -20,25 +23,32 @@ get_quiz_questions_answers() {
 
 # A curl to send message in a chat
 send_message(){
-    curl -s \
-        -d "{\"chat_id\": $1, \"text\": \"${2}\"}" \
-    -H "Content-Type: application/json" -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage
+    payload="{\"chat_id\": $1, \"text\": \"${2}\"}"
+    echo "msg-payload: $payload"
+    echo "----------------------------------------------"
+
+    curl -s -d "$payload" -H "Content-Type: application/json" -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage
 }
 
 # A curl to send the poll
 send_poll(){
-    curl -s \
-    -d "{\"chat_id\": $1, \
-            \"question\": \"😏 Can you guess the good answer(s) ?\n🤪 Don't worry it's anonymous !\",\
-            \"options\": [\"🤔 Option A\",\"😯 Option B\",\"🤧 Option C\",\"🥴 Option D\"]}" \
-    -H "Content-Type: application/json" -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendPoll
+    payload="{\"chat_id\": $1, \"question\": \"😏 Can you guess the good answer(s) ?\n🤪 Don't worry it's anonymous !\",\"options\": [$2]}"
+    echo "poll-payload: $payload"
+    echo "----------------------------------------------"
+
+    curl -s -d "$payload" -H "Content-Type: application/json" -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendPoll
 }
 
 ret=$(get_quiz_questions_answers)
-echo $ret | jq -r '[.question, .A, .B, .C, .D, .E] | @tsv' | \
-while IFS=$'\t' read -r question A B C D E; do
-    msg="👨🏾💻 Quiz ?\n${question} \n\nA $(escp ${A})\nB $(escp ${B})\nC $(escp ${C})\nD $(escp ${D})"
+echo $ret | jq -r '[.question, .A, .B, .C, .D] | @tsv' | \
+while IFS=$'\t' read -r question A B C D; do
+    msg="👨🏾💻 Quiz Time !?\n${question}"
+    options=$(escp "\"A:" $A)$(escp ",\"B:" $B)$(escp ",\"C:" $C)$(escp ",\"D:" $D)
 
-    send_message $CHAT_ID "${msg}"
-    send_poll $CHAT_ID
+    echo "msg: $msg"
+    echo "----------------------------------------------"
+    echo "options: $options"
+    echo "----------------------------------------------"
+    send_message $CHAT_ID "$msg"
+    send_poll $CHAT_ID "$options"
 done
