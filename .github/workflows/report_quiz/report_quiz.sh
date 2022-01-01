@@ -49,6 +49,10 @@ while IFS=$'\t' read -r question A B C D; do
     echo "----------------------------------------------"
     echo "options: $options"
     echo "----------------------------------------------"
+    # Let's remove the first and last trailing commas
+    options=${options#","}
+    options=${options%","}
+
     send_message $CHAT_ID "$msg"
     send_poll $CHAT_ID "$options"
 done
