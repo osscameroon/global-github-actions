@@ -14,6 +14,7 @@
 
     Join us here https://bit.ly/3EAdKbY
     #CaParleDev
+
   message-fr: |
     Vous avez une idee de projet utile a la population Cameroonaise ?
     Soumettez votre projet a la communautés osscameroon.
@@ -62,6 +63,7 @@
     Rajoutez vous aussi des applications et gagnez des Yotas, en suivant ce tutoriel
     https://bit.ly/3Ha6cym
     #CaParleDev
+    
   message-en: |
     Hi folks,
 
@@ -76,14 +78,14 @@
   targets:
     - twitter
     - telegram_channel
-  message-en:
+  message-en: |
     Contribute to one of osscameroon's open source projects and earn some Yotas for you to spend on our shop.
 
     To learn more about Yotas check out this video https://www.youtube.com/watch?v=cHLyhYmIFRk
     Find the shop here https://miniyotas.osscameroon.com/shop
     #CaParleDev
 
-  message-fr:
+  message-fr: |
     Contribuez a un des projets open source de la communauté pour gagner des Yotas, que vous pourrez
     depenser dans notre boutique en ligne.
 
@@ -95,12 +97,12 @@
   targets:
     - twitter
     - telegram_channel
-  message-en:
+  message-en: |
     Are you looking for developers to help you build your projects ?
     Find the amazing Cameroonian developers on https://osscameroon.com/developers
     #CaParleDev
 
-  message-fr:
+  message-fr: |
     Vous recherchez des developpeurs pour travailler sur vos projets ?
     Retrouvez les sur https://osscameroon.com/developers
     #CaParleDev
@@ -109,11 +111,11 @@
   targets:
     - twitter
     - telegram_channel
-  message-en:
+  message-en: |
     Checkout open source projects maintained par Cameroonian developers here https://osscameroon.com/projects
     #CaParleDev
 
-  message-fr:
+  message-fr: |
     Retrouvez des projets open source developpes par des developpeurs Camerounais ici https://osscameroon.com/projects
     #CaParleDev
 
@@ -122,7 +124,7 @@
     - twitter
     - telegram_channel
 
-  message-en:
+  message-en: |
     Please checkout this great article on how to find remote work from Cameroon by @Mairo_Rufus
     https://blog.osscameroon.com/post/articles/remote_work_cameroon
     #CaParleDev
@@ -132,7 +134,7 @@
     - twitter
     - telegram_channel
 
-  message-en:
+  message-en: |
     Please checkout this great article on The fish shell by @Mairo_Rufus
     https://blog.osscameroon.com/post/articles/the-fish-shell-is-amazing
     #CaParleDev
@@ -142,7 +144,7 @@
     - twitter
     - telegram_channel
 
-  message-en:
+  message-en: |
     Please checkout this great article on How to become a developer by @Pokam_Armand
     https://blog.osscameroon.com/post/articles/become-a-software-developer
     #CaParleDev
@@ -152,7 +154,7 @@
     - twitter
     - telegram_channel
 
-  message-en:
+  message-en: |
     Please checkout this great article on Docker basics by @abdounasser202
     https://blog.osscameroon.com/post/articles/docker-basics-and-commands
     #CaParleDev
@@ -162,7 +164,7 @@
     - twitter
     - telegram_channel
 
-  message-en:
+  message-en: |
     We are building the open source solution Cameroonians need, and we could not
     do it without your support.
 
@@ -178,7 +180,7 @@
     - twitter
     - telegram_channel
 
-  message-en:
+  message-en: |
     You recently learned something new or built something fun ?
     Share that with the osscameroon community by writing a blog article.
 
