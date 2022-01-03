@@ -8,7 +8,7 @@ jobs:
   send-message:
     defaults:
       run:
-        working-directory: ./.github/workflows/
+        working-directory: ./osscameroon-website/bots/hermes
 
     name: Send message
     runs-on: ubuntu-latest
@@ -18,7 +18,8 @@ jobs:
         with:
           token: ${{ secrets.GA_WORKFLOW_DEPLOYMENTS_TOKEN }}
           repository: osscameroon/osscameroon-website
-          path: bots/hermes
+          path: osscameroon-website
+          ref: change-hermes-message-format
 
       - name: Set up Python 3.8
         uses: actions/setup-python@v2
@@ -27,15 +28,19 @@ jobs:
 
       - name: Install dependencies
         run: |
+          pwd
           python -m pip install --upgrade pip
+          pwd
           pip install virtualenv
+          pwd
           make install-deps
 
       - name: send message
         env:
           GOOGLE_APPLICATION_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_APPLICATION_SERVICE_ACCOUNT }}
+          TELEGRAM_TOKEN: ${{ secrets.HERMES_TELEGRAM_BOT_TOKEN }}
 
         run: |
           mkdir .secrets/
-          echo $GOOGLE_APPLICATION_SERVICE_ACCOUNT >> ./secrets/service-account.json
+          echo $GOOGLE_APPLICATION_SERVICE_ACCOUNT >> ./.secrets/service-account.json
           make run
