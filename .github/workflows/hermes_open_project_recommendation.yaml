@@ -1,0 +1,41 @@
+name: hermes open source project recommendation
+on:
+#   schedule:
+#     - cron: "0 9 * * *"
+  push:
+
+jobs:
+  send-message:
+    defaults:
+      run:
+        working-directory: ./.github/workflows/
+
+    name: Send message
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout osscameroon-website
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GA_WORKFLOW_DEPLOYMENTS_TOKEN }}
+          repository: osscameroon/osscameroon-website
+          path: bots/hermes
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install virtualenv
+          make install-deps
+
+      - name: send message
+        env:
+          GOOGLE_APPLICATION_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_APPLICATION_SERVICE_ACCOUNT }}
+
+        run: |
+          mkdir .secrets/
+          echo $GOOGLE_APPLICATION_SERVICE_ACCOUNT >> ./secrets/service-account.json
+          make run
