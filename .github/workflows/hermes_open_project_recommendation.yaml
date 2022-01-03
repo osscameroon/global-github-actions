@@ -18,7 +18,6 @@ jobs:
           token: ${{ secrets.GA_WORKFLOW_DEPLOYMENTS_TOKEN }}
           repository: osscameroon/osscameroon-website
           path: osscameroon-website
-          ref: change-hermes-message-format
 
       - name: Set up Python 3.8
         uses: actions/setup-python@v2
