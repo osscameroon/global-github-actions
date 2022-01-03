@@ -41,5 +41,5 @@ jobs:
 
         run: |
           mkdir .secrets/
-          echo $GOOGLE_APPLICATION_SERVICE_ACCOUNT >> ./.secrets/service-account.json
+          echo $GOOGLE_APPLICATION_SERVICE_ACCOUNT > ./.secrets/service-account.json
           make run
