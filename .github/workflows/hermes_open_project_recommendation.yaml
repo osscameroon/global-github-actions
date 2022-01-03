@@ -1,8 +1,7 @@
 name: hermes open source project recommendation
 on:
-#   schedule:
-#     - cron: "0 9 * * *"
-  push:
+  schedule:
+    - cron: "0 8 * * *"
 
 jobs:
   send-message:
