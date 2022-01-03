@@ -39,6 +39,7 @@ jobs:
         env:
           GOOGLE_APPLICATION_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_APPLICATION_SERVICE_ACCOUNT }}
           TELEGRAM_TOKEN: ${{ secrets.HERMES_TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
 
         run: |
           mkdir .secrets/
