@@ -1,0 +1,45 @@
+name: hermes open source project recommendation
+on:
+  schedule:
+    - cron: "0 8 * * *"
+
+jobs:
+  send-message:
+    defaults:
+      run:
+        working-directory: ./osscameroon-website/bots/hermes
+
+    name: Send message
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout osscameroon-website
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GA_WORKFLOW_DEPLOYMENTS_TOKEN }}
+          repository: osscameroon/osscameroon-website
+          path: osscameroon-website
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          pwd
+          python -m pip install --upgrade pip
+          pwd
+          pip install virtualenv
+          pwd
+          make install-deps
+
+      - name: send message
+        env:
+          GOOGLE_APPLICATION_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_APPLICATION_SERVICE_ACCOUNT }}
+          TELEGRAM_TOKEN: ${{ secrets.HERMES_TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
+
+        run: |
+          mkdir .secrets/
+          echo $GOOGLE_APPLICATION_SERVICE_ACCOUNT > ./.secrets/service-account.json
+          make run
