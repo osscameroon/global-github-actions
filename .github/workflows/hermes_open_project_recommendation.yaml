@@ -38,10 +38,10 @@ jobs:
           GOOGLE_APPLICATION_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_APPLICATION_SERVICE_ACCOUNT }}
           TELEGRAM_TOKEN: ${{ secrets.HERMES_TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
-          consumer_key: ${{ secrets.TWITTER_CONSUMER_KEY }}
-          consumer_secret: ${{ secrets.TWITTER_CONSUMER_SECRET }}
-          api_key: ${{ secrets.TWITTER_API_KEY }}
-          api_secret: ${{ secrets.TWITTER_API_SECRET }}
+          CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
+          CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
+          API_KEY: ${{ secrets.TWITTER_API_KEY }}
+          API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
 
         run: |
           mkdir .secrets/
