@@ -20,4 +20,6 @@ All github actions that we run for the entire github organisation
     A github action to schedule messages on twitter, telegram
 - [report_quote](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/report_quotes.yaml)
     Using a small quote api to return some random programming quote.
+- [report_jobs](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/report_jobs.yaml)
+    Using an open jobs api to fetch some positions and propose that in osscameroon group chat.
 
