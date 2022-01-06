@@ -18,3 +18,6 @@ All github actions that we run for the entire github organisation
     A quiz bot that will print some quiz questions with options in the telegram chat group.
 - [social_media_message_scheduler](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/social_media_message_scheduler.yaml)
     A github action to schedule messages on twitter, telegram
+- [report_quote](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/report_quotes.yaml)
+    Using a small quote api to return some random programming quote.
+
