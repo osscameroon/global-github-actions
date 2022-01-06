@@ -2,7 +2,7 @@
 name: telegram quote report
 on:
   schedule:
-    - cron: "* */10 * * *"
+    - cron: "0 10 * * *"
 
 jobs:
   build:
