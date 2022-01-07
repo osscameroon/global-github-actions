@@ -22,7 +22,7 @@ jobs:
       - name: send jobs report to osscameroon group
         uses: appleboy/telegram-action@v0.1.1
         with:
-          to: ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }}
+          to: ${{ secrets.TELEGRAM_REMOTEJOBS_GROUP_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           format: MarkdownV2
           message_file: ./.github/workflows/report_jobs/report_jobs
