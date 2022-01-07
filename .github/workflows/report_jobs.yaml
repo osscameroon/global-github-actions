@@ -1,0 +1,28 @@
+
+name: telegram jobs report
+on:
+  schedule:
+    - cron: "0 15 * * *"
+
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: ./.github/workflows/report_jobs
+
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: get available jobs
+        shell: bash
+        run: |
+          ./report_jobs.sh > report_jobs
+
+      - name: send jobs report to osscameroon group
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{ secrets.TELEGRAM_REMOTEJOBS_GROUP_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          format: MarkdownV2
+          message_file: ./.github/workflows/report_jobs/report_jobs
