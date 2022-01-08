@@ -13,7 +13,7 @@ author=$(echo $result | jq '.a')
 quote=$(echo $result | jq '.q')
 
 echo ""
-echo "📖 Random Programming Quote !"
+echo "📖 Random Programming Quote \\!"
 echo ""
 echo " \`\`\`"
 echo "$quote"
