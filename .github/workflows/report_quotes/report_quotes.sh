@@ -14,7 +14,6 @@ quote=$(echo $result | jq '.q')
 
 echo ""
 echo "📖 Random Programming Quote \\!"
-echo ""
 echo " \`\`\`"
 echo "$quote"
 echo " \`\`\`"
