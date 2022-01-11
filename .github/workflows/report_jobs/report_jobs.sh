@@ -11,7 +11,7 @@ get_available_jobs(){
     | select(.tags[] | (
         select(. | contains("Remote")) or
         select(. | contains("IT Management")) or
-        select(. | contains("Software / Web Development")) or
+        select(. | contains("Software / Web Development"))
     ))'
 }
 
