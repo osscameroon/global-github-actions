@@ -7,25 +7,9 @@ CHAT_ID=$1
 TELEGRAM_BOT_TOKEN=$2
 QUIZAPI_KEY=$3
 
-# Count spaces from an incomming string
-# And exit if count spaces greather than 0
-exit_if_spaces(){
-    c="${1//[^ ]}"
-    if [[ ${#c} -gt 0 ]]
-    then
-        exit 0
-    fi
-}
-
 # To escapes some stupid quotes
 escp(){
-    # exit if there is spaces in the options
-    exit_if_spaces
-
-    if [[ ${#2} -gt 1 ]]
-    then
-        echo -e "$1 $(printf '%q' $2)\""
-    fi
+    echo -e \"$(printf '%q' "$1")\"
 }
 
 # to fetch programming questions
@@ -58,15 +42,17 @@ main(){
     echo $ret | jq -r '[.question, .A, .B, .C, .D] | @tsv' | \
     while IFS=$'\t' read -r question A B C D; do
         msg="👨🏾💻 Quiz Time !?\n${question}"
-        options=$(escp "\"" $A)$(escp ",\"" $B)$(escp ",\"" $C)$(escp ",\"" $D)
+        echo ChoiceA: $A
+        echo ChoiceB: $B
+        echo ChoiceC: $C
+        echo ChoiceD: $D
+        # We add the answer if not null
+        options=$(escp "$A"),$(escp "$B"),$(escp "$C"),$(escp "$D")
 
         echo "msg: $msg"
         echo "----------------------------------------------"
         echo "options: $options"
         echo "----------------------------------------------"
-        # Let's remove the first and last trailing commas
-        options=${options#","}
-        options=${options%","}
 
         send_message $CHAT_ID "$msg"
         send_poll $CHAT_ID "$options"
