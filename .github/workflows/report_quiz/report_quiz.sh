@@ -43,7 +43,8 @@ main(){
     while IFS=$'\t' read -r question A B C D; do
         msg="👨🏾💻 Quiz Time !?\n${question}"
         # We add the answer if not null
-        options=$(escp "$A"),$(escp "$B"),$(escp "$C"),$(escp "$D")
+        # We suppose that at this point we will have at least 2 options valid
+        options=$([ -z "$A" ] || echo $(escp "$A"))$([ -z "$B" ] || echo ,$(escp "$B"))$([ -z "$C" ] || echo ,$(escp "$C"))$([ -z "$D" ] || echo ,$(escp "$D"))
         echo $options
 
         echo "msg: $msg"
