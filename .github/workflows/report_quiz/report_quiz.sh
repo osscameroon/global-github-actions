@@ -42,12 +42,9 @@ main(){
     echo $ret | jq -r '[.question, .A, .B, .C, .D] | @tsv' | \
     while IFS=$'\t' read -r question A B C D; do
         msg="👨🏾💻 Quiz Time !?\n${question}"
-        echo ChoiceA: $A
-        echo ChoiceB: $B
-        echo ChoiceC: $C
-        echo ChoiceD: $D
         # We add the answer if not null
         options=$(escp "$A"),$(escp "$B"),$(escp "$C"),$(escp "$D")
+        echo $options
 
         echo "msg: $msg"
         echo "----------------------------------------------"
