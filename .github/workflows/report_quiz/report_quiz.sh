@@ -46,14 +46,21 @@ main(){
         # We suppose that at this point we will have at least 2 options valid
         options=$([ -z "$A" ] || echo $(escp "$A"))$([ -z "$B" ] || echo ,$(escp "$B"))$([ -z "$C" ] || echo ,$(escp "$C"))$([ -z "$D" ] || echo ,$(escp "$D"))
         echo $options
+        
+        # We verify if the options don't exceed the max length
+        max_length=100
+        if [ ${#A} -gt $max_length ] || [ ${#B} -gt $max_length ] || [ ${#C} -gt $max_length ] || [ ${#D} -gt $max_length ]; then
+            echo "[skipped] one option exceed the max max_length $max_length"
+        else
+            echo "msg: $msg"
+            echo "----------------------------------------------"
+            echo "options: $options"
+            echo "----------------------------------------------"
 
-        echo "msg: $msg"
-        echo "----------------------------------------------"
-        echo "options: $options"
-        echo "----------------------------------------------"
+            send_message $CHAT_ID "$msg"
+            send_poll $CHAT_ID "$options"
+        fi
 
-        send_message $CHAT_ID "$msg"
-        send_poll $CHAT_ID "$options"
     done
 }
 
