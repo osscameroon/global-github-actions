@@ -6,6 +6,7 @@ set -e
 CHAT_ID=$1
 TELEGRAM_BOT_TOKEN=$2
 QUIZAPI_KEY=$3
+skipped_quizzes=0
 
 # To escapes some stupid quotes
 escp(){
@@ -36,8 +37,8 @@ send_poll(){
     curl -s -d "$payload" -H "Content-Type: application/json" -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendPoll
 }
 
-# The main function to be executed
-main(){
+# Propose a quiz
+propose_quiz(){
     ret=$(get_quiz_questions_answers)
     echo $ret | jq -r '[.question, .A, .B, .C, .D] | @tsv' | \
     while IFS=$'\t' read -r question A B C D; do
@@ -51,8 +52,7 @@ main(){
         max_length=100
         if [ ${#A} -gt $max_length ] || [ ${#B} -gt $max_length ] || [ ${#C} -gt $max_length ] || [ ${#D} -gt $max_length ]; then
             echo "[skipped] one option exceed the max max_length $max_length"
-            # We look for another quiz
-            main
+            exit 1
         else
             echo "msg: $msg"
             echo "----------------------------------------------"
@@ -61,8 +61,22 @@ main(){
 
             send_message $CHAT_ID "$msg"
             send_poll $CHAT_ID "$options"
+
+            exit 0
         fi
 
+    done
+}
+
+# The main function to be executed
+main(){
+    while [ $skipped_quizzes -lt 3 ]; do
+        # We verify if the quiz has been proposed successfully
+        if propose_quiz; then
+            break
+        else
+            skipped_quizzes=$(expr $skipped_quizzes + 1)
+        fi
     done
 }
 
