@@ -51,6 +51,8 @@ main(){
         max_length=100
         if [ ${#A} -gt $max_length ] || [ ${#B} -gt $max_length ] || [ ${#C} -gt $max_length ] || [ ${#D} -gt $max_length ]; then
             echo "[skipped] one option exceed the max max_length $max_length"
+            # We look for another quiz
+            main
         else
             echo "msg: $msg"
             echo "----------------------------------------------"
