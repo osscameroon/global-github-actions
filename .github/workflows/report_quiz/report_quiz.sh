@@ -6,6 +6,7 @@ set -e
 CHAT_ID=$1
 TELEGRAM_BOT_TOKEN=$2
 QUIZAPI_KEY=$3
+MAX_LENGTH=100
 skipped_quizzes=0
 
 # To escapes some stupid quotes
@@ -49,9 +50,8 @@ propose_quiz(){
         echo $options
         
         # We verify if the options don't exceed the max length
-        max_length=100
-        if [ ${#A} -gt $max_length ] || [ ${#B} -gt $max_length ] || [ ${#C} -gt $max_length ] || [ ${#D} -gt $max_length ]; then
-            echo "[skipped] one option exceed the max max_length $max_length"
+        if [ ${#A} -gt $MAX_LENGTH ] || [ ${#B} -gt $MAX_LENGTH ] || [ ${#C} -gt $MAX_LENGTH ] || [ ${#D} -gt $MAX_LENGTH ]; then
+            echo "[skipped] one option exceed the max max_length $MAX_LENGTH"
             exit 1
         else
             echo "msg: $msg"
