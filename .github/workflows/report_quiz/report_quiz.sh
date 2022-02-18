@@ -6,6 +6,8 @@ set -e
 CHAT_ID=$1
 TELEGRAM_BOT_TOKEN=$2
 QUIZAPI_KEY=$3
+MAX_LENGTH=100
+skipped_quizzes=0
 
 # To escapes some stupid quotes
 escp(){
@@ -36,8 +38,8 @@ send_poll(){
     curl -s -d "$payload" -H "Content-Type: application/json" -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendPoll
 }
 
-# The main function to be executed
-main(){
+# Propose a quiz
+propose_quiz(){
     ret=$(get_quiz_questions_answers)
     echo $ret | jq -r '[.question, .A, .B, .C, .D] | @tsv' | \
     while IFS=$'\t' read -r question A B C D; do
@@ -46,14 +48,35 @@ main(){
         # We suppose that at this point we will have at least 2 options valid
         options=$([ -z "$A" ] || echo $(escp "$A"))$([ -z "$B" ] || echo ,$(escp "$B"))$([ -z "$C" ] || echo ,$(escp "$C"))$([ -z "$D" ] || echo ,$(escp "$D"))
         echo $options
-
+        
         echo "msg: $msg"
         echo "----------------------------------------------"
         echo "options: $options"
         echo "----------------------------------------------"
 
-        send_message $CHAT_ID "$msg"
-        send_poll $CHAT_ID "$options"
+        # We verify if the options don't exceed the max length
+        if [ ${#A} -gt $MAX_LENGTH ] || [ ${#B} -gt $MAX_LENGTH ] || [ ${#C} -gt $MAX_LENGTH ] || [ ${#D} -gt $MAX_LENGTH ]; then
+            echo "[skipped] one option exceed the max max_length $MAX_LENGTH"
+            exit 1
+        else
+            send_message $CHAT_ID "$msg"
+            send_poll $CHAT_ID "$options"
+
+            exit 0
+        fi
+
+    done
+}
+
+# The main function to be executed
+main(){
+    while [ $skipped_quizzes -lt 3 ]; do
+        # We verify if the quiz has been proposed successfully
+        if propose_quiz; then
+            break
+        else
+            skipped_quizzes=$(expr $skipped_quizzes + 1)
+        fi
     done
 }
 
