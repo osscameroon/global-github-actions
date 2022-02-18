@@ -49,16 +49,16 @@ propose_quiz(){
         options=$([ -z "$A" ] || echo $(escp "$A"))$([ -z "$B" ] || echo ,$(escp "$B"))$([ -z "$C" ] || echo ,$(escp "$C"))$([ -z "$D" ] || echo ,$(escp "$D"))
         echo $options
         
+        echo "msg: $msg"
+        echo "----------------------------------------------"
+        echo "options: $options"
+        echo "----------------------------------------------"
+
         # We verify if the options don't exceed the max length
         if [ ${#A} -gt $MAX_LENGTH ] || [ ${#B} -gt $MAX_LENGTH ] || [ ${#C} -gt $MAX_LENGTH ] || [ ${#D} -gt $MAX_LENGTH ]; then
             echo "[skipped] one option exceed the max max_length $MAX_LENGTH"
             exit 1
         else
-            echo "msg: $msg"
-            echo "----------------------------------------------"
-            echo "options: $options"
-            echo "----------------------------------------------"
-
             send_message $CHAT_ID "$msg"
             send_poll $CHAT_ID "$options"
 
