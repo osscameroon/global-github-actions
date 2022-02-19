@@ -11,7 +11,7 @@ skipped_quizzes=0
 
 # To escapes some stupid quotes
 escp(){
-    echo -e \"$(printf '%q' "$1")\"
+    echo -e \"$(printf '%q' "$*")\"
 }
 
 # to fetch programming questions
@@ -22,7 +22,7 @@ get_quiz_questions_answers() {
 
 # A curl to send message in a chat
 send_message(){
-    payload="{\"chat_id\": $1, \"text\": \"${2}\"}"
+    payload="{\"chat_id\": $1, \"text\": ${2}}"
     echo "msg-payload: $payload"
     echo "----------------------------------------------"
 
@@ -59,7 +59,7 @@ propose_quiz(){
             echo "[skipped] one option exceed the max max_length $MAX_LENGTH"
             exit 1
         else
-            send_message $CHAT_ID "$msg"
+            send_message $CHAT_ID "$(escp $msg)"
             send_poll $CHAT_ID "$options"
 
             exit 0
