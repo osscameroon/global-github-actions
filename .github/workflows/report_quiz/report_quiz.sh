@@ -42,7 +42,7 @@ send_poll(){
 propose_quiz(){
     ret=$(get_quiz_questions_answers)
     echo $ret | jq -r '[.question, .A, .B, .C, .D, .E, .F] | @tsv' | \
-    while IFS=$'\t' read -r question A B C D; do
+    while IFS=$'\t' read -r question A B C D E F; do
         msg="👨🏾💻 Quiz Time !?\n${question}"
         # We add the answer if not null
         # We suppose that at this point we will have at least 2 options valid
