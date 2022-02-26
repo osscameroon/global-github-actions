@@ -57,12 +57,12 @@ propose_quiz(){
         # We verify if the options don't exceed the max length
         if [ ${#A} -gt $MAX_LENGTH ] || [ ${#B} -gt $MAX_LENGTH ] || [ ${#C} -gt $MAX_LENGTH ] || [ ${#D} -gt $MAX_LENGTH ] || [ ${#E} -gt $MAX_LENGTH ] || [ ${#F} -gt $MAX_LENGTH ]; then
             echo "[skipped] one option exceed the max max_length $MAX_LENGTH"
-            exit 1
+            return 1
         else
             send_message $CHAT_ID "$(escp $msg)"
             send_poll $CHAT_ID "$options"
 
-            exit 0
+            return 0
         fi
 
     done
