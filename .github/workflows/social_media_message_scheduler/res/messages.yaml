@@ -51,7 +51,7 @@
     Rajoutez vous aussi des applications et gagnez des Yotas, en suivant ce tutoriel
     https://shr.cm/0e4523b6
     #CaParleDev
-    
+
   message-en: |
     Hi folks,
     Checkout this catalogue of applications, videogames and Cameroonian communities
@@ -132,6 +132,56 @@
     Please checkout this great article on Docker basics by @abdounasser202
     https://blog.osscameroon.com/post/articles/docker-basics-and-commands
     #CaParleDev
+- blog_become_a_software_developer:
+  targets:
+    - twitter
+    - telegram_channel
+
+  message-en: |
+    Please checkout this great article on How to to become a software developer by @pokam_armand
+    https://blog.osscameroon.com/post/articles/become-a-software-developer
+    #CaParleDev
+
+- blog_deploy_castlemock_kubernetes_helm:
+  targets:
+    - twitter
+    - telegram_channel
+
+  message-en: |
+    Please checkout this great article on castelmock with kubernetes and helm by @blvcktherippa
+    https://blog.osscameroon.com/post/articles/deploy_castlemock_kubernetes_helm
+    #CaParleDev
+
+- blog_music_while_coding_is_it_worth:
+  targets:
+    - twitter
+    - telegram_channel
+
+  message-en: |
+    Please checkout this great article on music and developers by @pokam_armand
+    https://blog.osscameroon.com/post/articles/music-while-coding-is-it-worth
+    #CaParleDev
+
+- blog_how_to_create_a_hotspot_on_linux:
+  targets:
+    - twitter
+    - telegram_channel
+
+  message-en: |
+    Please checkout this great article on how to create a hotspot on linux by @pythonbrad
+    https://blog.osscameroon.com/post/articles/how_to_create_a_hotspot_on_linux
+    #CaParleDev
+
+- blog_defeating_imposter_syndrome:
+  targets:
+    - twitter
+    - telegram_channel
+
+  message-en: |
+    Please checkout this great article on defeating imposter syndrome by @pokam_armand
+    https://blog.osscameroon.com/post/articles/old-enemy-impostor-syndrome/
+    #CaParleDev
+
 - support_the_community:
   targets:
     - twitter
