@@ -11,7 +11,7 @@ rand=$[$RANDOM % ${#sort_element[@]}]
 # param: repository name
 get_open_projects_issues() {
 	page=$1
-    repo=https://api.github.com/repos/osscameroon/Open-Projects
+    repo=https://api.github.com/repos/osscameroon/project-ideas
 	curl -H "Accept: application/vnd.github.v3+json" \
     $repo/issues\?sort=${sort_element[$rand]}\&direction=desc\&state\=open\&per_page\=10\&page\=$page 2>/dev/null | \
     jq '[limit(7;.[])] | .[] | {url: .url, user: .user.login, body: .body[0:300], comments: .comments, reactions: .reactions.total_count, c: .total_count}'
@@ -50,7 +50,7 @@ generate_msg(){
 current_date=$(date)
 echo "$current_date"
 echo ""
-echo "Open Ideas/Projects report"
+echo "Project ideas report"
 echo ""
 echo ""
 echo "😎 Helloooo genius people \\!"
@@ -60,5 +60,5 @@ generate_msg
 echo "Don t forget, you can \\:"
 echo "\\>  Choose an idea, contribute in the chat or exchange with others \\!"
 echo "\\>  Create your issue as a project you have in mind \\!"
-echo "Feel free to create an idea \\(a provided template is available\\) or just read more [HERE](https://github.com/osscameroon/Open-Projects/issues) \\!"
+echo "Feel free to create an idea \\(a provided template is available\\) or just read more [HERE](https://github.com/osscameroon/project-ideas/issues) \\!"
 echo "" #for telegram format
