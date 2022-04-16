@@ -17,7 +17,7 @@ escp(){
 # to fetch programming questions
 get_quiz_questions_answers() {
     curl https://quizapi.io/api/v1/questions -G -d apiKey=$QUIZAPI_KEY -d limit=1 -d difficulty=easy 2>/dev/null | \
-    jq '.[] | {question: .question, A: .answers.answer_a, B: .answers.answer_b, C: .answers.answer_c, D: .answers.answer_d, E: .answers.answer_e, F: .answers.answer_f, tags: [.tags[].name] | join(" ")}'
+    jq '.[] | {question: .question, A: .answers.answer_a, B: .answers.answer_b, C: .answers.answer_c, D: .answers.answer_d, E: .answers.answer_e, F: .answers.answer_f, tags: [.tags[].name] | join(" "), multiple_correct_answers: .multiple_correct_answers}'
 }
 
 # A curl to send message in a chat
@@ -31,7 +31,7 @@ send_message(){
 
 # A curl to send the poll
 send_poll(){
-    payload="{\"chat_id\": $1, \"question\": \"😏 Can you guess the good answer(s) ?\n🤪 Don't worry it's anonymous !\",\"options\": [$2]}"
+    payload="{\"chat_id\": $1, \"question\": \"😏 Can you guess the good answer(s) ?\n🤪 Don't worry it's anonymous !\",\"options\": [$2],\"allows_multiple_answers\": $3}"
     echo "poll-payload: $payload"
     echo "----------------------------------------------"
 
@@ -49,6 +49,7 @@ propose_quiz(){
     E=$(jq -r '.E // empty' <<< $ret)
     F=$(jq -r '.F // empty' <<< $ret)
     tags=$(jq -r '.tags' <<< $ret)
+    multiple_correct_answers=$(jq -r '.multiple_correct_answers' <<< $ret)
     msg="👨🏾💻 Quiz Time !?\n${question}\nHints: $tags"
     # We add the answer if not null
     # We suppose that at this point we will have at least 2 options valid
@@ -66,7 +67,7 @@ propose_quiz(){
         return 1
     else
         send_message $CHAT_ID "$(escp $msg)"
-        send_poll $CHAT_ID "$options"
+        send_poll $CHAT_ID "$options" $multiple_correct_answers
 
         return 0
     fi
