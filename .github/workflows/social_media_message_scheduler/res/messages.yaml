@@ -206,3 +206,30 @@
     This issue will help you get started
     https://github.com/osscameroon/osscameroon-blog/issues/22
     #CaParleDev
+- blog_how_we_build_oss_projects:
+  targets:
+    - twitter
+    - telegram_channel
+
+  message-en: |
+    Please checkout this great article on how we build open source projects by @elhmne
+    https://blog.osscameroon.com/post/articles/how-to-build-an-oss-project
+    #CaParleDev
+- jobsika_checkout:
+  targets:
+    - twitter
+    - telegram_channel
+
+  message-en: |
+    You don't know what salary to ask for a job position ?
+    Checkout https://jobsika.cm to find out what people earn for the same position in Cameroon.
+    #CaParleDev
+- jobsika_contribute:
+  targets:
+    - twitter
+    - telegram_channel
+
+  message-en: |
+    You had a great or bad experience working for a Cameroonian company ?
+    Share your experience and salary on http://jobsika.cm .
+    #CaParleDev
