@@ -102,7 +102,7 @@
     - telegram_channel
 
   message-en: |
-    Please checkout this great article on how to find remote work from Cameroon by @rufusmairo
+    Please checkout this great article on how to find remote work from Cameroon by @_paulmairo
     https://blog.osscameroon.com/post/articles/remote_work_cameroon
     #CaParleDev
 - blog_fish_shell:
@@ -111,7 +111,7 @@
     - telegram_channel
 
   message-en: |
-    Please checkout this great article on The fish shell by @rufusmairo
+    Please checkout this great article on The fish shell by @_paulmairo
     https://blog.osscameroon.com/post/articles/the-fish-shell-is-amazing
     #CaParleDev
 - blog_become_a_developer:
