@@ -31,7 +31,7 @@ Send a message to the telegram channel whenever a new pull request is openened/c
 On your repository create a `.github/workflows/notify_on_pull_request_open.yaml` file.
 Then copy and paste in your newly created file the content bellow.
 
-```
+```yaml
 name: notify of pull_request creation
 on:
   pull_request_target:
