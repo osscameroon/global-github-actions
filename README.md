@@ -4,8 +4,6 @@ All github actions that we run for the entire github organisation
 
 ## Github actions list
 
-- [notify_on_pull_request_open](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/notify_on_pull_request_open.yaml)
-    Notify to the telegram group/channel of OssCameroon for a new Pull Request.
 - [recommend_yotas_issues](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/notify_on_pull_request_open.yaml)
     Send a message to the telegram group/channel of OssCameroon for available yotas to earn on some Pulls Requests.
 - [report_contributions](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/notify_on_pull_request_open.yaml)
@@ -23,3 +21,44 @@ All github actions that we run for the entire github organisation
 - [report_jobs](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/report_jobs.yaml)
     Using an open jobs api to fetch some positions and propose that in osscameroon group chat.
 
+
+## [notify_on_pull_request_open](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/notify_on_pull_request_open.yaml)
+
+Send a message to the telegram channel whenever a new pull request is openened/created.
+
+### Usage
+
+On your repository create a `.github/workflows/notify_on_pull_request_open.yaml` file.
+Then copy and paste in your newly created file the content bellow.
+
+```
+name: notify of pull_request creation
+on:
+  pull_request_target:
+    types: [ opened ]
+    branches:
+      - main
+
+jobs:
+  notify:
+    uses: osscameroon/global-github-actions/.github/workflows/notify_on_pull_request_open.yaml@main
+    secrets:
+      telegram_channel_id: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
+      telegram_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+
+name: notify of pull_request creation
+on:
+  pull_request_target:
+    types: [ opened ]
+    branches:
+      - main
+
+jobs:
+  notify:
+    uses: osscameroon/global-github-actions/.github/workflows/notify_on_pull_request_open.yaml@main
+    secrets:
+      telegram_channel_id: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
+      telegram_token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+```
+
+You can use [this file](https://github.com/osscameroon/global-github-actions/blob/HEAD/.github/workflows/notify_on_pull_request_open.yaml) as reference
