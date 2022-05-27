@@ -17,7 +17,9 @@ jobs:
     name: notify
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
+        with:
+          repository: osscameroon/global-github-actions
       - name: notify telegram when pull request is a created
         shell: bash
         run: |
