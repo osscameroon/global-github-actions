@@ -1,16 +1,19 @@
 name: notify of pull_request creation
 on:
-  pull_request_target:
-    types: [ opened ]
-    branches:
-      - main
+  workflow_call:
+    secrets:
+      telegram_channel_id:
+        description: 'Specify the telegram channel id'
+        required: true
+      telegram_token:
+        description: 'Specify telegram bot token'
+        required: true
 
 jobs:
   notify:
     defaults:
       run:
         working-directory: ./.github/workflows/notify_on_pull_request_open
-
     name: notify
     runs-on: ubuntu-latest
     steps:
@@ -22,6 +25,6 @@ jobs:
       - name: send contribution report to osscameroon channel
         uses: appleboy/telegram-action@v0.1.1
         with:
-          to: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
-          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          to: ${{ secrets.telegram_channel_id }}
+          token: ${{ secrets.telegram_token }}
           message_file: ./.github/workflows/notify_on_pull_request_open/notify_on_pull_request_open_message
