@@ -103,7 +103,7 @@
 
   message-en: |
     Please checkout this great article on how to find remote work from Cameroon by @_paulmairo
-    https://blog.osscameroon.com/post/articles/remote_work_cameroon
+    https://blog.osscameroon.com/post/articles/remote-work-cameroon
     #CaParleDev
 - blog_fish_shell:
   targets:
@@ -112,7 +112,7 @@
 
   message-en: |
     Please checkout this great article on The fish shell by @_paulmairo
-    https://blog.osscameroon.com/post/articles/the-fish-shell-is-amazing
+    https://blog.osscameroon.com/post/articles/fish-shell-amazing
     #CaParleDev
 - blog_become_a_developer:
   targets:
@@ -121,7 +121,7 @@
 
   message-en: |
     Please checkout this great article on How to become a developer by @Pokam_Armand
-    https://blog.osscameroon.com/post/articles/become-a-software-developer
+    https://blog.osscameroon.com/post/articles/become-software-developer
     #CaParleDev
 - blog_docker_basic:
   targets:
@@ -139,7 +139,7 @@
 
   message-en: |
     Please checkout this great article on How to to become a software developer by @pokam_armand
-    https://blog.osscameroon.com/post/articles/become-a-software-developer
+    https://blog.osscameroon.com/post/articles/become-software-developer
     #CaParleDev
 
 - blog_deploy_castlemock_kubernetes_helm:
@@ -149,7 +149,7 @@
 
   message-en: |
     Please checkout this great article on castelmock with kubernetes and helm by @blvcktherippa
-    https://blog.osscameroon.com/post/articles/deploy_castlemock_kubernetes_helm
+    https://blog.osscameroon.com/post/articles/deploy-castlemock-kubernetes-helm
     #CaParleDev
 
 - blog_music_while_coding_is_it_worth:
@@ -159,7 +159,7 @@
 
   message-en: |
     Please checkout this great article on music and developers by @pokam_armand
-    https://blog.osscameroon.com/post/articles/music-while-coding-is-it-worth
+    https://blog.osscameroon.com/post/articles/music-while-coding-worth
     #CaParleDev
 
 - blog_how_to_create_a_hotspot_on_linux:
@@ -169,7 +169,7 @@
 
   message-en: |
     Please checkout this great article on how to create a hotspot on linux by @pythonbrad
-    https://blog.osscameroon.com/post/articles/how_to_create_a_hotspot_on_linux
+    https://blog.osscameroon.com/post/articles/how-create-hotspot-linux
     #CaParleDev
 
 - blog_defeating_imposter_syndrome:
@@ -179,7 +179,7 @@
 
   message-en: |
     Please checkout this great article on defeating imposter syndrome by @pokam_armand
-    https://blog.osscameroon.com/post/articles/old-enemy-impostor-syndrome/
+    https://blog.osscameroon.com/post/articles/old-enemy-impostor-syndrome
     #CaParleDev
 
 - support_the_community:
@@ -203,6 +203,6 @@
   message-en: |
     You recently learned something new or built something fun ?
     Share that with the osscameroon community by writing a blog article.
-    This issue will help you get started
-    https://github.com/osscameroon/osscameroon-blog/issues/22
+    This blog post will help you get started
+    https://blog.osscameroon.com/posts/how-to-write-a-post-on-oss-cameroon-blog
     #CaParleDev
