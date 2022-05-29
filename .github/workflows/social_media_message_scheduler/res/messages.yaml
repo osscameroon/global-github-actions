@@ -114,15 +114,6 @@
     Please checkout this great article on The fish shell by @_paulmairo
     https://blog.osscameroon.com/post/articles/fish-shell-amazing
     #CaParleDev
-- blog_become_a_developer:
-  targets:
-    - twitter
-    - telegram_channel
-
-  message-en: |
-    Please checkout this great article on How to become a developer by @Pokam_Armand
-    https://blog.osscameroon.com/post/articles/become-software-developer
-    #CaParleDev
 - blog_docker_basic:
   targets:
     - twitter
