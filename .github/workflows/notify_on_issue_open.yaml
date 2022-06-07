@@ -1,0 +1,32 @@
+name: notify of issue creation
+on:
+  workflow_call:
+    secrets:
+      telegram_channel_id:
+        description: 'Specify the telegram channel id'
+        required: true
+      telegram_token:
+        description: 'Specify telegram bot token'
+        required: true
+
+jobs:
+  notify:
+    defaults:
+      run:
+        working-directory: ./.github/workflows/notify_on_issue_open
+    name: notify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: osscameroon/global-github-actions
+      - name: notify telegram when issue is a created
+        shell: bash
+        run: |
+          ./build_issue_notification.sh $GITHUB_EVENT_PATH > notify_on_issue_open_message
+      - name: send contribution report to osscameroon channel
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{ secrets.telegram_channel_id }}
+          token: ${{ secrets.telegram_token }}
+          message_file: ./.github/workflows/notify_on_issue_open/notify_on_issue_open_message
