@@ -26,11 +26,11 @@ format_msg(){
     ret=$(get_available_jobs)
     echo $ret | jq -r '[.location, .remote, .url, .title, .company_name, .description] | @tsv' | \
     while IFS=$'\t' read -r location remote url title company_name description; do
-        echo "Title\\: $title"
+        echo "Title\\: `$title`"
         echo "Description\\: "
 
         echo " \`\`\`"
-        echo "$description..."
+        echo "$description"
         echo " \`\`\`"
         echo ""
 
@@ -57,7 +57,7 @@ echo ""
 echo ""
 echo "😎 Helloooo people \\!"
 echo ""
-echo "We found some opportunities..."
+echo "We found some opportunities\\.\\.\\."
 echo ""
 format_msg
 echo ""
