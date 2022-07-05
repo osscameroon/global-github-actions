@@ -11,23 +11,38 @@ auth.set_access_token(api_key, api_secret)
 api = tweepy.API(auth)
 
 
-def post_tweet(text):
+def post_tweet(text, media=None):
     print("Twitter publisher: \n", text)
     print("Lenght: ", len(text))
-    api.update_status(text)
+
+    media_absolute_path = (
+        f'{os.path.dirname(os.path.abspath(__file__))}'
+        f'/res/medias/{media}'
+    )
+    print(f'{media=}')
+    if media and os.path.exists(media_absolute_path):
+        print(
+            f'Media : {media_absolute_path}, '
+            f'Size: {os.path.getsize(media_absolute_path)}'
+        )
+        # posting the tweet
+        api.update_with_media(media_absolute_path, text)
+    else:
+        api.update_status(text)
 
 
-def twitter_publisher(message):
+def twitter_publisher(message, media=None):
     if message is None:
         raise Exception("Error message not found")
 
     if "message" in message:
         text = message["message"]
-        post_tweet(text)
+        post_tweet(text, media)
     else:
         if "message-en" in message:
             text = message["message-en"]
-            post_tweet(text)
+            post_tweet(text, media)
         if "message-fr" in message:
             text = message["message-fr"]
-            post_tweet(text)
+            post_tweet(text, media)
+
