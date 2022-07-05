@@ -40,7 +40,10 @@ def publish_messages(messages):
         for target in targets:
             if target in func_publishers:
                 try:
-                    func_publishers[target](message)
+                    func_publishers[target](
+                        message=message,
+                        media=message.get('media', None)
+                    )
                 except Exception as exc:
                     print(exc)
         print("\n")

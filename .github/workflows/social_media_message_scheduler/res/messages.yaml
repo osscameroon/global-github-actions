@@ -1,3 +1,5 @@
+---
+
 # the message name or id
 - submit_project_ideas:
   #the list of target describes where you want your message to be sent it can be
@@ -177,7 +179,7 @@
   targets:
     - twitter
     - telegram_channel
-
+  media: support_the_community.jpg
   message-en: |
     We are building the open source solution Cameroonians need, and we could not
     do it without your support.
@@ -186,6 +188,7 @@
     and leave us a coffee
     https://opencollective.com/osscameroon
     #CaParleDev
+
 - write_a_blog:
   targets:
     - twitter
