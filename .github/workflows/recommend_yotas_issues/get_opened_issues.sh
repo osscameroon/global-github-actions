@@ -2,7 +2,7 @@
 
 set -e
 
-#get_org_repos print out organisation list of repositories
+#get_org_not_archived_repos print out organisation list of not archived repositories
 #param: organisation name
 get_org_repos() {
 	org=$1
