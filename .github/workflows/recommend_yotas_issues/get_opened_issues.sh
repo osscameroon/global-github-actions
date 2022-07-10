@@ -6,7 +6,7 @@ set -e
 #param: organisation name
 get_org_repos() {
 	org=$1
-	curl -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.v3+json"  https://api.github.com/orgs/$org/repos 2>/dev/null | jq 'map(.[].url | select(.[].archived == false))' -r
+	curl -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.v3+json"  https://api.github.com/orgs/$org/repos 2>/dev/null | jq '.[].url | select(.[].archived == false)' -r
 }
 
 #get_repository_issues print out organisation list of repositories
