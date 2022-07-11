@@ -48,3 +48,7 @@ jobs:
 ```
 
 You can use [this file](https://github.com/osscameroon/global-github-actions/blob/HEAD/.github/workflows/notify_on_pull_request_open.yaml) as reference
+
+
+![Alt](https://repobeats.axiom.co/api/embed/543b48955b6c028475b2c10d945c24714a0e52f3.svg "Repobeats analytics image")
+
