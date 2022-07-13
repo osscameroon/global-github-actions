@@ -2,11 +2,13 @@
 
 set -e
 
-#get_org_repos print out organisation list of repositories
+#get_org_unarchived_repos print out organisation list of not archived repositories
+#The list should not contain archived repos like the former repo osscameroon-blog
+#After checking GitHub API to list organization repositories(https://docs.github.com/en/rest/repos/repos#list-organization-repositories), we'll filter with the condition archived==false
 #param: organisation name
-get_org_repos() {
+get_org_unarchived_repos() {
 	org=$1
-	curl -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.v3+json"  https://api.github.com/orgs/$org/repos 2>/dev/null | jq '.[].url' -r
+	curl -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.v3+json"  https://api.github.com/orgs/$org/repos 2>/dev/null | jq '.[] | select(.archived == false) | .url' -r
 }
 
 #get_repository_issues print out organisation list of repositories
@@ -18,7 +20,7 @@ get_repository_opened_issues() {
 }
 
 ORG=osscameroon
-REPOSITORIES=$(get_org_repos $ORG)
+REPOSITORIES=$(get_org_unarchived_repos $ORG)
 
 #get repositories issues
 for repo in $REPOSITORIES; do
