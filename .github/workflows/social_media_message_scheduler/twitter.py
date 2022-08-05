@@ -15,20 +15,23 @@ def post_tweet(text, media=None):
     print("Twitter publisher: \n", text)
     print("Lenght: ", len(text))
 
-    media_absolute_path = (
-        f'{os.path.dirname(os.path.abspath(__file__))}'
-        f'/res/medias/{media}'
-    )
-    print(f'{media=}')
-    if media and os.path.exists(media_absolute_path):
-        print(
-            f'Media : {media_absolute_path}, '
-            f'Size: {os.path.getsize(media_absolute_path)}'
-        )
-        # posting the tweet
-        api.update_with_media(media_absolute_path, text)
-    else:
+    if not media:
         api.update_status(text)
+    else:
+        media_absolute_path = (
+            f'{os.path.dirname(os.path.abspath(__file__))}'
+            f'/res/medias/{media}'
+        )
+        print(f'{media=}')
+        if os.path.exists(media_absolute_path):
+            print(
+                f'Media : {media_absolute_path}, '
+                f'Size: {os.path.getsize(media_absolute_path)}'
+            )
+            # posting the tweet
+            api.update_status_with_media(text, media_absolute_path)
+        else:
+            api.update_status(text)
 
 
 def twitter_publisher(message, media=None):
