@@ -12,7 +12,7 @@ PYTHON=$(VENVPATH)/bin/python3
 .PHONY: venv
 venv: $(VENVPATH)/bin/activate
 $(VENVPATH)/bin/activate: requirements.txt
-	test -d $(VENVPATH) || virtualenv -p python3 $(VENVPATH); \
+	test -d $(VENVPATH) || python3 -m venv $(VENVPATH); \
 	. $(VENVPATH)/bin/activate; \
 	pip install -r requirements.txt; \
 	touch $(VENVPATH)/bin/activate;
