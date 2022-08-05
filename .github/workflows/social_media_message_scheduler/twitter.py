@@ -29,7 +29,7 @@ def post_tweet(text, media=None):
                 f'Size: {os.path.getsize(media_absolute_path)}'
             )
             # posting the tweet
-            api.update_status_with_media(media_absolute_path, text)
+            api.update_status_with_media(text, media_absolute_path)
         else:
             api.update_status(text)
 
