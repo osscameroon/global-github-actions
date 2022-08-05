@@ -7,6 +7,7 @@
   targets:
     - twitter
     - telegram_channel
+    - telegram_group
 
   message-en: |
     Don't forget to fill in your salary on http://jobsika.cm 😁🎉.
