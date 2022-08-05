@@ -1,0 +1,17 @@
+---
+
+# the message name or id
+- jobsika_contribute:
+  #the list of target describes where you want your message to be sent it can be
+  # <twitter OR telegram_group OR telegram_channel >
+  targets:
+    - twitter
+    - telegram_channel
+
+  message-en: |
+    Don't forget to fill in your salary on http://jobsika.cm 😁🎉.
+    The platform is completely anonymous.
+  message-fr: |
+    N’oubliez pas de renseigner votre salaire sur http://jobsika.cm 😁🎉.
+    La platform est complètement anonyme"
+    #CaParleDev
