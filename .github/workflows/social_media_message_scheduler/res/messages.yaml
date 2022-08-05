@@ -218,12 +218,17 @@
     You don't know what salary to ask for a job position ?
     Checkout https://jobsika.cm to find out what people earn for the same position in Cameroon.
     #CaParleDev
+
 - jobsika_contribute:
   targets:
     - twitter
     - telegram_channel
 
   message-en: |
-    You had a great or bad experience working for a Cameroonian company ?
-    Share your experience and salary on http://jobsika.cm .
+    Don't forget to fill in your salary on http://jobsika.cm 😁🎉.
+    The platform is completely anonymous.
+
+  message-fr: |
+    N’oubliez pas de renseigner votre salaire sur http://jobsika.cm 😁🎉.
+    La platform est complètement anonyme"
     #CaParleDev
