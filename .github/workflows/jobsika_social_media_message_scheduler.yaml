@@ -1,0 +1,37 @@
+name: jobsika social media message scheduler
+on:
+  schedule:
+    - cron: "0 15 28 * *"
+
+jobs:
+  send-message:
+    defaults:
+      run:
+        working-directory: ./.github/workflows/jobsika_social_media_message_scheduler
+
+    name: Send message
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install virtualenv
+          make install-deps
+
+      - name: send message
+        env:
+          consumer_key: ${{ secrets.TWITTER_CONSUMER_KEY }}
+          consumer_secret: ${{ secrets.TWITTER_CONSUMER_SECRET }}
+          api_key: ${{ secrets.TWITTER_API_KEY }}
+          api_secret: ${{ secrets.TWITTER_API_SECRET }}
+          run_number: ${{ github.run_number }}
+
+        run: |
+          make run
