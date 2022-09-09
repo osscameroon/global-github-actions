@@ -8,7 +8,7 @@ set -e
 #param: organisation name
 get_org_unarchived_repos() {
 	org=$1
-	curl -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.v3+json"  https://api.github.com/orgs/$org/repos 2>/dev/null | jq '.[] | select(.archived == false) | .url' -r
+	curl -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github+json"  https://api.github.com/orgs/$org/repos 2>/dev/null | jq '.[] | select(.archived == false) | .url' -r
 }
 
 #get_repository_issues print out organisation list of repositories
@@ -16,7 +16,7 @@ get_org_unarchived_repos() {
 get_repository_opened_issues() {
 	repo=$1
 	page=$2
-	curl -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.v3+json"  $repo/issues\?state\=open\&per_page\=100\&page\=$page 2>/dev/null | jq 'map(select(.labels[].name | contains("Yotas"))) | map({issue: .html_url, title: .title, author: .user.login, yotas: .labels[] | select( .name | contains("Yotas") ) | .name})'
+	curl -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github+json"  $repo/issues\?state\=open\&per_page\=100\&page\=$page 2>/dev/null | jq 'map(select(.labels[].name | contains("Yotas"))) | map({issue: .html_url, title: .title, author: .user.login, yotas: .labels[] | select( .name | contains("Yotas") ) | .name})'
 }
 
 ORG=osscameroon
