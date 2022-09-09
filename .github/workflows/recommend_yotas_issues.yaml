@@ -16,7 +16,10 @@ jobs:
       - name: get yotas issues
         shell: bash
         run: |
-          GITHUB_TOKEN=${{ secrets.BOT_GITHUB_TOKEN }} ./get_yotas_issues.sh > yotas_issues_message
+          GITHUB_TOKEN=${{ secrets.BOT_GITHUB_TOKEN }}
+          curl -H "Authorization: token $GITHUB_TOKEN"  \
+               -H "Accept: application/vnd.github+json" \
+               https://api.github.com/orgs/osscameroon/repos
 
       - name: send custom message with to osscameroon channel
         uses: appleboy/telegram-action@v0.1.1
