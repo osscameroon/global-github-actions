@@ -8,7 +8,7 @@ set -e
 #param: organisation name
 get_org_unarchived_repos() {
 	org=$1
-	curl -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github+json"  https://api.github.com/orgs/$org/repos 2>/dev/null | jq '.[] | select(.archived == false) | .url' -r
+	curl -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github+json"  https://api.github.com/orgs/$org/repos 2>/dev/null | jq '.[] | .url' -r
 }
 
 #get_repository_issues print out organisation list of repositories
