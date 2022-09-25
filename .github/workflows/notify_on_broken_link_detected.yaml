@@ -1,0 +1,23 @@
+name: notify on broken link detected
+on:
+  workflow_dispatch:
+
+env:
+  HOST: https://osscameroon.com,https://blog.osscameroon.com
+  TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+  TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+
+jobs:
+  notify:
+    name: notify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install the broken link checker
+        shell: bash
+        run: |
+          sh /.github/workflows/notify_on_broken_link_detected/install_deps.sh
+      - name: Check the websites
+        shell: bash
+        run: |
+          sh ./.github/workflows/notify_on_broken_link_detected/run.sh
