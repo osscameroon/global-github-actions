@@ -7,6 +7,7 @@ report_file="report.txt"
 
 # Track the broken links
 blc_track(){
+    # we run the blc in deep scan with browser support enabled.
     python -m blc.blc -n -d .5 -b 5 $HOST > $report_file
     # We look for an error
     for i in $(cat $report_file | grep "\w* errors" -o | grep "[0-9]*" -o)
