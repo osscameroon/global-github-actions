@@ -61,6 +61,14 @@ echo "$((total_issues_and_pr_contributions_ext - total_pr_contributions_ext)) is
 echo "$total_issues_and_pr_contributions_ext issues and pull request external ontributions."
 echo ""
 
-termgraph issues_and_pull_request_contributions.csv  --title "Contributors"  --width=5
+# sorting the results
+#-k2 sorts by column 1.
+#-n sorts numerically instead of lexicographically (so "11" will not come before "2,3...").
+#-t, sets the delimiter (what separates values in your file) to , since your file is comma-separated
+#-r reverse order
+
+sort -k2 -n -t, -r issues_and_pull_request_contributions.csv > issues_and_pull_request_contributions_sorted.csv
+
+termgraph issues_and_pull_request_contributions_sorted.csv  --title "Contributors"  --width=5
 echo "Thanks for your contributions 🥳 🙇 🙌"
 echo "\`\`\`" #for telegram format
