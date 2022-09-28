@@ -27,10 +27,10 @@ jobs:
 
       - name: send message
         env:
-          consumer_key: ${{ secrets.TWITTER_CONSUMER_KEY }}
-          consumer_secret: ${{ secrets.TWITTER_CONSUMER_SECRET }}
-          api_key: ${{ secrets.TWITTER_API_KEY }}
-          api_secret: ${{ secrets.TWITTER_API_SECRET }}
+          consumer_key: ${{ secrets.JOBSIKA_TWITTER_CONSUMER_KEY }}
+          consumer_secret: ${{ secrets.JOBSIKA_TWITTER_CONSUMER_SECRET }}
+          api_key: ${{ secrets.JOBSIKA_TWITTER_API_KEY }}
+          api_secret: ${{ secrets.JOBSIKA_TWITTER_API_SECRET }}
           run_number: ${{ github.run_number }}
 
         run: |
