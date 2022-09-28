@@ -1,7 +1,7 @@
 name: jobsika social media message scheduler
 on:
   schedule:
-    - cron: "0 15 28 * *"
+    - cron: "0 15 27 * *"
 
 jobs:
   send-message:
