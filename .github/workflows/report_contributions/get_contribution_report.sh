@@ -66,7 +66,6 @@ echo ""
 #-n sorts numerically instead of lexicographically (so "11" will not come before "2,3...").
 #-t, sets the delimiter (what separates values in your file) to , since your file is comma-separated
 #-r reverse order
-
 sort -k2 -n -t, -r issues_and_pull_request_contributions.csv > issues_and_pull_request_contributions_sorted.csv
 
 termgraph issues_and_pull_request_contributions_sorted.csv  --title "Contributors"  --width=5
