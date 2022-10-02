@@ -1,5 +1,7 @@
 name: report tech news
-on: [push]
+on:
+  schedule:
+    - cron: "0 9 * * *"
 
 jobs:
   build:
@@ -19,7 +21,6 @@ jobs:
           go build
           ./report_news ${{ secrets.NEWS_API_KEY }} ${{ secrets.TELEGRAM_BOT_TOKEN }} ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
 
-#       - uses: actions/setup-go@v3
-#       - name: Send the news api message to osscameroon group
-#         run: |
-#           ./report_news ${{ secrets.NEWS_API_KEY }} ${{ secrets.TELEGRAM_BOT_TOKEN }} ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }}
+      - uses: actions/setup-go@v3
+      - name: Send the news api message to osscameroon group
+        run: ./report_news ${{ secrets.NEWS_API_KEY }} ${{ secrets.TELEGRAM_BOT_TOKEN }} ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }}
