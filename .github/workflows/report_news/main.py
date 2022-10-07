@@ -1,5 +1,5 @@
 import json
-import requests
+from urllib.request import urlopen
 import xml.etree.ElementTree as ET
 
 TECH_GRIOT = 'https://techgriot.co/feed'
@@ -10,8 +10,10 @@ def fetch_articles() -> list:
     This function is responsible for fetching and
     parsing datas from techgrio
     """
-    r = requests.get(TECH_GRIOT)
-    xml_raw = ET.fromstring(r.text)
+    with urlopen(TECH_GRIOT) as response:
+         body = response.read()
+
+    xml_raw = ET.fromstring(body)
 
     articles = []
     for x in xml_raw.findall('.//item'):
