@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"encoding/json"
 	"errors"
 	"log"
@@ -29,30 +28,30 @@ func FetchArticles(apiKey string) (string, error) {
 	return aResp.TextOutput(7), nil
 }
 
-// SendMessageToTelegram to send a messahe on oss channel or group
-func SendMessageToTelegram(chat_id string, telegram_bot_token string, message string) bool {
+// // SendMessageToTelegram to send a messahe on oss channel or group
+// func SendMessageToTelegram(chat_id string, telegram_bot_token string, message string) bool {
 
-	json_payload := map[string]string{"chat_id": chat_id, "text": message}
-	json_data, err := json.Marshal(json_payload)
+// 	json_payload := map[string]string{"chat_id": chat_id, "text": message}
+// 	json_data, err := json.Marshal(json_payload)
 
-	if err != nil {
-		log.Fatal(err)
-		return false
-	}
+// 	if err != nil {
+// 		log.Fatal(err)
+// 		return false
+// 	}
 
-	resp, err := http.Post(
-		TELEGRAM_API_URL+telegram_bot_token+"/sendMessage",
-		"application/json",
-		bytes.NewBuffer(json_data),
-	)
+// 	resp, err := http.Post(
+// 		TELEGRAM_API_URL+telegram_bot_token+"/sendMessage",
+// 		"application/json",
+// 		bytes.NewBuffer(json_data),
+// 	)
 
-	if err != nil {
-		log.Fatal(err)
-		return false
-	}
+// 	if err != nil {
+// 		log.Fatal(err)
+// 		return false
+// 	}
 
-	var res map[string]interface{}
+// 	var res map[string]interface{}
 
-	json.NewDecoder(resp.Body).Decode(&res)
-	return true
-}
+// 	json.NewDecoder(resp.Body).Decode(&res)
+// 	return true
+// }

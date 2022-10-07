@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+   xmlns:content="http://purl.org/rss/1.0/modules/content/"
+   xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:atom="http://www.w3.org/2005/Atom"
+   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+   xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+   xmlns:georss="http://www.georss.org/georss"
+   xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+   >
+   <channel>
+      <title>TechGriot</title>
+      <atom:link href="https://techgriot.co/feed/" rel="self" type="application/rss+xml" />
+      <link>
+      https://techgriot.co</link>
+      <description>Exploiter le plein potentiel de la technologie</description>
+      <lastBuildDate>Fri, 07 Oct 2022 19:13:38 +0000</lastBuildDate>
+      <language>fr-FR</language>
+      <sy:updatePeriod>
+         hourly	
+      </sy:updatePeriod>
+      <sy:updateFrequency>
+         1	
+      </sy:updateFrequency>
+      <generator>https://wordpress.org/?v=6.0.2</generator>
+      <image>
+         <url>https://i0.wp.com/techgriot.co/wp-content/uploads/2021/04/cropped-Logo-TG-carre-1.png?fit=32%2C32&#038;ssl=1</url>
+         <title>TechGriot</title>
+         <link>
+         https://techgriot.co</link>
+         <width>32</width>
+         <height>32</height>
+      </image>
+      <site xmlns="com-wordpress:feed-additions:1">196903285</site>
+      <item>
+         <title>#VendrediTech n°1️⃣0️⃣9️⃣- Edition du 07/10/2022</title>
+         <link>
+         https://techgriot.co/vendreditech/2022/10/vt109/</link>
+         <comments>https://techgriot.co/vendreditech/2022/10/vt109/#respond</comments>
+         <dc:creator>
+            <![CDATA[Axel Toubson]]>
+         </dc:creator>
+         <pubDate>Fri, 07 Oct 2022 18:30:27 +0000</pubDate>
+         <category>
+            <![CDATA[#VendrediTech]]>
+         </category>
+         <guid isPermaLink="false">https://techgriot.co/?p=7578</guid>
+         <description>
+            <![CDATA[Hello ! 😁 La semaine a été très chargée dans la planète tech avec des sorties à tout vent. Nous vous avons concocté des articles qui devraient vous ravir et vous mettre à la page. Alors, on scroll, on clique et on savoure sans modération et on n&#8217;oublie pas de partager! Google dévoile ses nouveaux Pixel 7 et 7 Pro 📱 Annoncés un peu plus tôt, les nouveaux smartphones de Google, les Pixel 7 et Pixel 7 Pro, ont enfin eu droit à leur présentation officielle. Au programme, de la continuité au niveau du design et un IA aux petits [&#8230;]]]>
+         </description>
+         <wfw:commentRss>https://techgriot.co/vendreditech/2022/10/vt109/feed/</wfw:commentRss>
+         <slash:comments>0</slash:comments>
+         <post-id xmlns="com-wordpress:feed-additions:1">7578</post-id>
+      </item>
+      <item>
+         <title>Edition de tweets, mix des médias, vidéo façon TikTok, voici les nouveautés de Twitter 🐦</title>
+         <link>
+         https://techgriot.co/actualites/2022/10/edition-de-tweets-mix-des-medias-video-facon-tiktok-voici-les-nouveautes-de-twitter/</link>
+         <comments>https://techgriot.co/actualites/2022/10/edition-de-tweets-mix-des-medias-video-facon-tiktok-voici-les-nouveautes-de-twitter/#respond</comments>
+         <dc:creator>
+            <![CDATA[Axel Toubson]]>
+         </dc:creator>
+         <pubDate>Fri, 07 Oct 2022 18:26:07 +0000</pubDate>
+         <category>
+            <![CDATA[Actualités]]>
+         </category>
+         <category>
+            <![CDATA[Réseaux sociaux]]>
+         </category>
+         <category>
+            <![CDATA[Twitter]]>
+         </category>
+         <guid isPermaLink="false">https://techgriot.co/?p=7604</guid>
+         <description>
+            <![CDATA[Cette semaine, Twitter a fait le plein de nouveautés sur sa plateforme. Si certaines sont gratuites et accessibles à tout le monde, une en particulier va nécessiter un abonnement Twitter Blue Vous voulez modifier vos tweets, il va falloir passer à la caisse ✏️ Comme vous l&#8217;annoncions il y&#8217;a quelques semaines (dans cet article), le bouton d&#8217;édition était en cours de test sur Twitter. Ces derniers étant concluants, ils sont maintenant accessibles à un plus grand nombre. Les abonnés de Twitter Blue, l&#8217;abonnement mensuel premium de Twitter, présents au Canada, en Australie, et en Nouvelle-Zélande pourront avoir accès à cette [&#8230;]]]>
+         </description>
+         <wfw:commentRss>https://techgriot.co/actualites/2022/10/edition-de-tweets-mix-des-medias-video-facon-tiktok-voici-les-nouveautes-de-twitter/feed/</wfw:commentRss>
+         <slash:comments>0</slash:comments>
+         <post-id xmlns="com-wordpress:feed-additions:1">7604</post-id>
+      </item>
+      <item>
+         <title>Dites bonjour au nouveau smartphone de Xiaomi, le Xiaomi 12T Pro 📱</title>
+         <link>
+         https://techgriot.co/actualites/2022/10/dites-bonjour-au-nouveau-smartphone-de-xiaomi-le-xiaomi-12t-pro/</link>
+         <comments>https://techgriot.co/actualites/2022/10/dites-bonjour-au-nouveau-smartphone-de-xiaomi-le-xiaomi-12t-pro/#respond</comments>
+         <dc:creator>
+            <![CDATA[Axel Toubson]]>
+         </dc:creator>
+         <pubDate>Fri, 07 Oct 2022 18:24:44 +0000</pubDate>
+         <category>
+            <![CDATA[Actualités]]>
+         </category>
+         <category>
+            <![CDATA[Smartphones]]>
+         </category>
+         <category>
+            <![CDATA[Xiaomi]]>
+         </category>
+         <guid isPermaLink="false">https://techgriot.co/?p=7595</guid>
+         <description>
+            <![CDATA[Tout récemment Xiaomi a dévoilé le 12T Pro, un nouveau venu dans la série T 😄. Il s’agit d’un téléphone haut de gamme que la marque chinoise a présenté lors de sa dernière conférence à Munich. Qu’est ce qui peut bien nous attendre comme nouveauté au niveau des fonctionnalités ? Ses particularités📷 La principale caractéristique de ce téléphone réside dans son capteur photo grand-angle de 200 mégapixels (MP). Vous aurez la possibilité d’obtenir des clichés de 12,5 MP, 50 MP ou encore 200 MP. Autre point important, ce capteur possède une ouverture à f/1.69. Le tout combiné donnera un résultat magique [&#8230;]]]>
+         </description>
+         <wfw:commentRss>https://techgriot.co/actualites/2022/10/dites-bonjour-au-nouveau-smartphone-de-xiaomi-le-xiaomi-12t-pro/feed/</wfw:commentRss>
+         <slash:comments>0</slash:comments>
+         <post-id xmlns="com-wordpress:feed-additions:1">7595</post-id>
+      </item>
+      <item>
+         <title>Amazon dévoile sa nouvelle liseuse avec stylet, la Kindle Scribe 📖✏️</title>
+         <link>
+         https://techgriot.co/actualites/2022/10/amazon-devoile-sa-nouvelle-liseuse-avec-stylet-la-kindle-scribe/</link>
+         <comments>https://techgriot.co/actualites/2022/10/amazon-devoile-sa-nouvelle-liseuse-avec-stylet-la-kindle-scribe/#respond</comments>
+         <dc:creator>
+            <![CDATA[Axel Toubson]]>
+         </dc:creator>
+         <pubDate>Fri, 07 Oct 2022 18:22:35 +0000</pubDate>
+         <category>
+            <![CDATA[Actualités]]>
+         </category>
+         <category>
+            <![CDATA[Amazon]]>
+         </category>
+         <category>
+            <![CDATA[Kindle]]>
+         </category>
+         <category>
+            <![CDATA[Kindle Scribe]]>
+         </category>
+         <category>
+            <![CDATA[Liseuse]]>
+         </category>
+         <guid isPermaLink="false">https://techgriot.co/?p=7583</guid>
+         <description>
+            <![CDATA[Amazon a récemment organisé une conférence pour présenter ses nouveaux produits. Et s&#8217;il y&#8217;a bien un qui ressort du lot, c&#8217;est la nouvelle liseuse Kindle, qui pour la première fois est accompagnée d&#8217;un stylet. Prenez-vous notes de lecture plus facilement avec le stylet de la Kindle Scribe ✏️ Pour ceux qui ne savent pas ce qu&#8217;est une Kindle, et bien c&#8217;est assez simple. Il s&#8217;agit d&#8217;une liseuse proposée par Amazon. Comme toute les autres liseuses, elle offre un confort de lecture proche du papier, grâce à son écran e-ink, et permet de lire plusieurs livres en déplacement, grâce à un [&#8230;]]]>
+         </description>
+         <wfw:commentRss>https://techgriot.co/actualites/2022/10/amazon-devoile-sa-nouvelle-liseuse-avec-stylet-la-kindle-scribe/feed/</wfw:commentRss>
+         <slash:comments>0</slash:comments>
+         <post-id xmlns="com-wordpress:feed-additions:1">7583</post-id>
+      </item>
+      <item>
+         <title>Google nous donne un aperçu de sa prochaine tablette, la Pixel Tablet 📺</title>
+         <link>
+         https://techgriot.co/actualites/2022/10/google-nous-donne-un-apercu-de-sa-prochaine-tablette-la-pixel-tablet/</link>
+         <comments>https://techgriot.co/actualites/2022/10/google-nous-donne-un-apercu-de-sa-prochaine-tablette-la-pixel-tablet/#respond</comments>
+         <dc:creator>
+            <![CDATA[Axel Toubson]]>
+         </dc:creator>
+         <pubDate>Fri, 07 Oct 2022 18:21:23 +0000</pubDate>
+         <category>
+            <![CDATA[Actualités]]>
+         </category>
+         <category>
+            <![CDATA[Produits]]>
+         </category>
+         <category>
+            <![CDATA[Google]]>
+         </category>
+         <category>
+            <![CDATA[Google Pixel]]>
+         </category>
+         <category>
+            <![CDATA[Pixel Tablet]]>
+         </category>
+         <guid isPermaLink="false">https://techgriot.co/?p=7642</guid>
+         <description>
+            <![CDATA[Lors de sa conférence Made my Google, le géant du web a présenté ses nouveaux Pixel 7 et 7 Pro (que vous pouvez découvrir en cliquant ici) mais aussi sa première montre connectée, la Pixel Watch (que vous pouvez découvrir en cliquant ici). Mais ce n&#8217;est pas tout. Google a aussi profité de l&#8217;occasion pour donner un aperçu d&#8217;un produit à venir : La Pixel Tablet. Une belle promesse pour 2023 🤩 La Pixel Tablet sera la première tablette Made By Google. Il faut dire que l&#8217;entreprise californienne a enfin décidé de prendre au sérieux les tablettes, notamment depuis l&#8217;arrivée [&#8230;]]]>
+         </description>
+         <wfw:commentRss>https://techgriot.co/actualites/2022/10/google-nous-donne-un-apercu-de-sa-prochaine-tablette-la-pixel-tablet/feed/</wfw:commentRss>
+         <slash:comments>0</slash:comments>
+         <post-id xmlns="com-wordpress:feed-additions:1">7642</post-id>
+      </item>
+      <item>
+         <title>Google dévoile sa première montre connectée, la Pixel Watch ⌚</title>
+         <link>
+         https://techgriot.co/actualites/2022/10/google-devoile-sa-premiere-montre-connectee-la-pixel-watch/</link>
+         <comments>https://techgriot.co/actualites/2022/10/google-devoile-sa-premiere-montre-connectee-la-pixel-watch/#respond</comments>
+         <dc:creator>
+            <![CDATA[Axel Toubson]]>
+         </dc:creator>
+         <pubDate>Fri, 07 Oct 2022 18:20:21 +0000</pubDate>
+         <category>
+            <![CDATA[Actualités]]>
+         </category>
+         <guid isPermaLink="false">https://techgriot.co/?p=7634</guid>
+         <description>
+            <![CDATA[Google a profité de l&#8217;officialisation de ses nouveaux smartphones, Google Pixel 7 et 7 Pro (que vous pouvez retrouver en cliquant ici) pour dévoiler sa première montre connectée : la Pixel Watch. Une montre connectée circulaire, avec une taille unique ⌚ Pour sa première montre connectée, Google a choisi d&#8217;adopter un design circulaire, avec un diamètre de 41 mm et une couronne pour la navigation. Ce design minimaliste rappelle les vraie montres. Par contre, pour les bracelets, Google s&#8217;éloigne des standards des montres classiques pour se créer ses propres bracelets propriétaires. Ils sont disponibles en 2 tailles, 130-175 mm ou [&#8230;]]]>
+         </description>
+         <wfw:commentRss>https://techgriot.co/actualites/2022/10/google-devoile-sa-premiere-montre-connectee-la-pixel-watch/feed/</wfw:commentRss>
+         <slash:comments>0</slash:comments>
+         <post-id xmlns="com-wordpress:feed-additions:1">7634</post-id>
+      </item>
+      <item>
+         <title>Google dévoile ses nouveaux Pixel 7 et 7 Pro 📱</title>
+         <link>
+         https://techgriot.co/actualites/2022/10/google-devoile-ses-nouveaux-pixel-7-et-7-pro/</link>
+         <comments>https://techgriot.co/actualites/2022/10/google-devoile-ses-nouveaux-pixel-7-et-7-pro/#respond</comments>
+         <dc:creator>
+            <![CDATA[Axel Toubson]]>
+         </dc:creator>
+         <pubDate>Fri, 07 Oct 2022 17:36:50 +0000</pubDate>
+         <category>
+            <![CDATA[Actualités]]>
+         </category>
+         <category>
+            <![CDATA[Produits]]>
+         </category>
+         <category>
+            <![CDATA[Smartphones]]>
+         </category>
+         <category>
+            <![CDATA[Google]]>
+         </category>
+         <category>
+            <![CDATA[Google Pixel]]>
+         </category>
+         <category>
+            <![CDATA[Pixel 7]]>
+         </category>
+         <category>
+            <![CDATA[Pixel 7 Pro]]>
+         </category>
+         <guid isPermaLink="false">https://techgriot.co/?p=7609</guid>
+         <description>
+            <![CDATA[Plus tôt cette année, Google avait donné un aperçu de ses nouveaux Pixel 7 et 7 Pro. Cette semaine, le géant du web les a présenté en détail. Google a trouvé la formule pour sa gamme Pixel 📱 Pour la première fois depuis l&#8217;avènement de la gamme Pixel, le design des smartphones n&#8217;évolue pas d&#8217;une année à l&#8217;autre. Les nouveaux Pixel 7 et 7 Pro adoptent un design similaire à celui de l&#8217;année passée, avec le module photo intégré dans une proéminence horizontale. Mais cette année, elle troque sa couleur noire pour une couleur chromée ou bronze. Les objectifs ressortent [&#8230;]]]>
+         </description>
+         <wfw:commentRss>https://techgriot.co/actualites/2022/10/google-devoile-ses-nouveaux-pixel-7-et-7-pro/feed/</wfw:commentRss>
+         <slash:comments>0</slash:comments>
+         <post-id xmlns="com-wordpress:feed-additions:1">7609</post-id>
+      </item>
+      <item>
+         <title>Le clavier SwiftKey quitte iOS 📱⌨️</title>
+         <link>
+         https://techgriot.co/actualites/2022/10/le-clavier-swiftkey-quitte-ios/</link>
+         <comments>https://techgriot.co/actualites/2022/10/le-clavier-swiftkey-quitte-ios/#respond</comments>
+         <dc:creator>
+            <![CDATA[Axel Toubson]]>
+         </dc:creator>
+         <pubDate>Wed, 05 Oct 2022 21:19:55 +0000</pubDate>
+         <category>
+            <![CDATA[Actualités]]>
+         </category>
+         <category>
+            <![CDATA[App Store]]>
+         </category>
+         <category>
+            <![CDATA[Apple]]>
+         </category>
+         <category>
+            <![CDATA[iOS]]>
+         </category>
+         <category>
+            <![CDATA[Microsoft]]>
+         </category>
+         <category>
+            <![CDATA[SwiftKey]]>
+         </category>
+         <guid isPermaLink="false">https://techgriot.co/?p=7590</guid>
+         <description>
+            <![CDATA[Le 05 octobre dernier, iOS a perdu son meilleurs claviers alternatifs : Microsoft SwiftKey. Plus de SwitfKey pour iOS, il va falloir se contenter du clavier natif 😓 Lancé en 2010 sur Android puis en 2014 sur iOS, SwiftKey est un clavier alternatif, c&#8217;est-à-dire non proposé nativement ni par iOS, ni par Android. A cette époque, ce clavier était en avance sur son temps, notamment grâce à sa saisie prédictive ultra efficace. C&#8217;est d&#8217;ailleurs l&#8217;une des raisons de son rachat par Microsoft en 2016. Malheureusement, ce clavier a quitté iOS. Cette nouvelle n&#8217;est pas très surprenante pour les utilisateurs car [&#8230;]]]>
+         </description>
+         <wfw:commentRss>https://techgriot.co/actualites/2022/10/le-clavier-swiftkey-quitte-ios/feed/</wfw:commentRss>
+         <slash:comments>0</slash:comments>
+         <post-id xmlns="com-wordpress:feed-additions:1">7590</post-id>
+      </item>
+      <item>
+         <title>#VendrediTech n°1️⃣0️⃣8️⃣- Edition du 30/09/2022</title>
+         <link>
+         https://techgriot.co/vendreditech/2022/09/vt108/</link>
+         <comments>https://techgriot.co/vendreditech/2022/09/vt108/#respond</comments>
+         <dc:creator>
+            <![CDATA[Axel Toubson]]>
+         </dc:creator>
+         <pubDate>Fri, 30 Sep 2022 17:00:50 +0000</pubDate>
+         <category>
+            <![CDATA[#VendrediTech]]>
+         </category>
+         <category>
+            <![CDATA[Apple]]>
+         </category>
+         <category>
+            <![CDATA[Batterie]]>
+         </category>
+         <category>
+            <![CDATA[Bose]]>
+         </category>
+         <category>
+            <![CDATA[Bose QC Earbuds 2]]>
+         </category>
+         <category>
+            <![CDATA[Call Links]]>
+         </category>
+         <category>
+            <![CDATA[Captcha]]>
+         </category>
+         <category>
+            <![CDATA[Deezer]]>
+         </category>
+         <category>
+            <![CDATA[Google]]>
+         </category>
+         <category>
+            <![CDATA[Hameçonnage]]>
+         </category>
+         <category>
+            <![CDATA[iPhone]]>
+         </category>
+         <category>
+            <![CDATA[iPhone 14 Pro]]>
+         </category>
+         <category>
+            <![CDATA[Meta]]>
+         </category>
+         <category>
+            <![CDATA[Microsoft]]>
+         </category>
+         <category>
+            <![CDATA[Phishing]]>
+         </category>
+         <category>
+            <![CDATA[Streaming]]>
+         </category>
+         <category>
+            <![CDATA[Streaming Audio]]>
+         </category>
+         <category>
+            <![CDATA[Turnstile]]>
+         </category>
+         <category>
+            <![CDATA[WhatsApp]]>
+         </category>
+         <category>
+            <![CDATA[Windows]]>
+         </category>
+         <category>
+            <![CDATA[Windows 11]]>
+         </category>
+         <guid isPermaLink="false">https://techgriot.co/?p=7502</guid>
+         <description>
+            <![CDATA[Alors on vous a manqué(e)s? Nous revenons avec toujours plus d&#8217;infos de votre planète tech pour vous faire plaisir. Le rituel vous le connaissez: On scroll, on clique et on savoure sans modération et on n&#8217;oublie pas de partager! Bose dévoile ses nouveaux écouteurs sans fil : Bose QuietComfort® Earbuds II 🎧 Deux ans après avoir dévoilé ses premiers écouteurs sans fil à réduction de bruit, Bose remet le couvert avec les QuietComfort® Earbuds II. Au programme, cure d&#8217;amaigrissement du boitier et des écouteurs, mais aussi une meilleure réduction de bruits  Lire l&#8217;article complet WhatsApp veut simplifier les appels avec [&#8230;]]]>
+         </description>
+         <wfw:commentRss>https://techgriot.co/vendreditech/2022/09/vt108/feed/</wfw:commentRss>
+         <slash:comments>0</slash:comments>
+         <post-id xmlns="com-wordpress:feed-additions:1">7502</post-id>
+      </item>
+      <item>
+         <title>Bose dévoile ses nouveaux écouteurs sans fil à réduction de bruits : Bose QuietComfort® Earbuds II 🎧</title>
+         <link>
+         https://techgriot.co/actualites/2022/09/bose-devoile-ses-nouveaux-ecouteurs-sans-fil-bose-quietcomfort-earbuds-ii/</link>
+         <comments>https://techgriot.co/actualites/2022/09/bose-devoile-ses-nouveaux-ecouteurs-sans-fil-bose-quietcomfort-earbuds-ii/#respond</comments>
+         <dc:creator>
+            <![CDATA[Axel Toubson]]>
+         </dc:creator>
+         <pubDate>Fri, 30 Sep 2022 16:39:15 +0000</pubDate>
+         <category>
+            <![CDATA[Actualités]]>
+         </category>
+         <category>
+            <![CDATA[Produits]]>
+         </category>
+         <category>
+            <![CDATA[Bose]]>
+         </category>
+         <category>
+            <![CDATA[Bose QC Earbuds 2]]>
+         </category>
+         <guid isPermaLink="false">https://techgriot.co/?p=7505</guid>
+         <description>
+            <![CDATA[Deux ans après avoir lancé ses premiers écouteurs sans fil à réduction de bruits, Bose est de retour avec une nouvelle itération : les écouteurs Bose QuietComfort® Earbuds II. Un design complètement revu 🎧 Avec cette nouvelle version, Bose a complètement revu sa copie. Il faut dire que la première version n&#8217;était pas très discrète, écouteurs comme boîtier, loin de ce qui était proposé sur le marché. Les nouveaux écouteurs de la marque américaine sont plus compacts, avec un gabarit réduit d&#8217;un tiers selon Bose. Les écouteurs Bose QuietComfort® Earbuds II adoptent aussi un style avec tige extérieur, popularisé par [&#8230;]]]>
+         </description>
+         <wfw:commentRss>https://techgriot.co/actualites/2022/09/bose-devoile-ses-nouveaux-ecouteurs-sans-fil-bose-quietcomfort-earbuds-ii/feed/</wfw:commentRss>
+         <slash:comments>0</slash:comments>
+         <post-id xmlns="com-wordpress:feed-additions:1">7505</post-id>
+      </item>
+   </channel>
+</rss>
