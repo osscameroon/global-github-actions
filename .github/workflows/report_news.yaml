@@ -15,4 +15,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Send the news api message to osscameroon channel
-        run: make run
+        run: make run > new_feed_message
+
+      - name: Dump message
+        run: cat new_feed_message
+
+#       - name: send contribution report to osscameroon channel
+#         uses: appleboy/telegram-action@v0.1.1
+#         with:
+#           to: ${{ secrets.telegram_channel_id }}
+#           token: ${{ secrets.telegram_token }}
+#           message_file: ./.github/workflows/notify_on_pull_request_open/notify_on_pull_request_open_message
