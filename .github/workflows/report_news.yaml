@@ -15,10 +15,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Send the news api message to osscameroon channel
-        run: make run > new_feed_message
+        run: make -s run > new_feed_message.json
 
       - name: Dump message
-        run: cat new_feed_message
+        run: cat new_feed_message.json
 
 #       - name: send contribution report to osscameroon channel
 #         uses: appleboy/telegram-action@v0.1.1
