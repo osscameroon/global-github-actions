@@ -1,7 +1,8 @@
 name: report tech news
 on:
-  schedule:
-    - cron: "0 9 * * *"
+  push:
+    branches:
+      - bichakala-bobeh
 
 jobs:
   build:
@@ -12,15 +13,6 @@ jobs:
     name: Build And Send
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-go@v3
-        with:
-          go-version: 1.18.4
       - uses: actions/checkout@v3
       - name: Send the news api message to osscameroon channel
-        run: |
-          go build
-          ./report_news ${{ secrets.NEWS_API_KEY }} ${{ secrets.TELEGRAM_BOT_TOKEN }} ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
-
-      - uses: actions/setup-go@v3
-      - name: Send the news api message to osscameroon group
-        run: ./report_news ${{ secrets.NEWS_API_KEY }} ${{ secrets.TELEGRAM_BOT_TOKEN }} ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }}
+        run: make run
