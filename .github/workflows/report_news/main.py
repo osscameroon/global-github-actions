@@ -34,6 +34,14 @@ def fetch_articles() -> list:
 
     return articles
 
+"""
+TODO:
+
+- ecrire un message contenant les articles de techgriot
+- porte news_api code
+- concatene tout ca dans un seul message
+"""
+
 
 if __name__ == '__main__':
     print(json.dumps(fetch_articles()))
