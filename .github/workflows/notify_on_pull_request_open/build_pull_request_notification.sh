@@ -9,8 +9,6 @@ TITLE=$(cat $FILE | jq '.pull_request.title' -r)
 DESCRIPTION=$(cat $FILE | jq '.pull_request.body' -r)
 USER=$(cat $FILE | jq '.sender.login' -r)
 
-echo "DESCRIPTION: $DESCRIPTION"
-
 echo "A new pull request was submitted by $USER"
 echo "Please check it out here $LINK"
 echo "And feel free to review it"
