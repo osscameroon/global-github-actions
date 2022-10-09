@@ -2,6 +2,7 @@ import json
 from hashlib import sha1
 import random
 import os
+from typing import Iterable
 from urllib.request import urlopen
 import xml.etree.ElementTree as ET
 
@@ -84,7 +85,7 @@ def store_hashes(hashes: list):
     with open(REPORT_NEWS_HASHES, 'w') as hh:
         hh.write('\n'.join(hashes))
 
-def build_news():
+def build_news() -> Iterable:
     """
     We build news
     """
@@ -112,8 +113,17 @@ def build_news():
         max_iterations -= 1
 
     store_hashes(list(hashes.keys()))
+    return result.values()
 
-    return json.dumps(list(result.values()))
+def format_str():
+    finalOutput = ""
+
+    for article in build_news():
+        finalOutput += "\n" + article['title'] + "\n\n" + article['description']
+        finalOutput += "...\n> " + article['link']
+        finalOutput += "\n-------------------------------------------\n"
+
+    return finalOutput
 
 """
 TODO:
@@ -121,4 +131,5 @@ TODO:
 """
 
 if __name__ == '__main__':
-    print(build_news())
+    print(format_str())
+
