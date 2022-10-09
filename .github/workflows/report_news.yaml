@@ -28,3 +28,12 @@ jobs:
           to: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message_file: ./.github/workflows/report_news/news_feed_message
+
+      - name: Commit list of the articles we have already shared
+        shell: bash
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com" && \
+          git config --global user.name "github-actions[bot]" && \
+          git add ./report_news.hash && \
+          git commit -m 'update report_news.hash' && \
+          git push origin bichakala-bobeh
