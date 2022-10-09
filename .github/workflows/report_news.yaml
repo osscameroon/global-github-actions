@@ -19,12 +19,12 @@ jobs:
           NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
         run: make -s run > news_feed_message
 
-      - name: Dump message # Debug
+      - name: Dump message
         run: cat news_feed_message
 
-#       - name: send contribution report to osscameroon channel
-#         uses: appleboy/telegram-action@v0.1.1
-#         with:
-#           to: ${{ secrets.telegram_channel_id }}
-#           token: ${{ secrets.telegram_token }}
-#           message_file: ./.github/workflows/report_news/news_feed_message
+      - name: send contribution report to osscameroon channel
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message_file: ./.github/workflows/report_news/news_feed_message
