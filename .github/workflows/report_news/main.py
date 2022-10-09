@@ -10,7 +10,7 @@ TECH_GRIOT_API_URL = 'https://techgriot.co/feed'
 NEWS_API_URL = 'https://newsapi.org/v2/top-headlines?sources=techcrunch'
 NEWS_API_KEY = os.getenv('NEWS_API_KEY')
 REPORT_NEWS_HASHES = 'report_news.hash'
-MAX_ARTICLES = 10
+MAX_ARTICLES = 5
 
 
 def fetch_tech_crunch():
