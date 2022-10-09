@@ -1,8 +1,7 @@
 name: report tech news
 on:
-  push:
-    branches:
-      - bichakala-bobeh
+  schedule:
+    - cron: "0 9 * * *"
 
 jobs:
   build:
@@ -39,4 +38,4 @@ jobs:
           git config --global user.name "github-actions[bot]" && \
           git add ./report_news.hash && \
           git commit -m 'update report_news.hash' && \
-          git push origin bichakala-bobeh
+          git push origin main
