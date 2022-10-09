@@ -12,15 +12,30 @@ jobs:
     name: Build And Send
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-go@v3
-        with:
-          go-version: 1.18.4
       - uses: actions/checkout@v3
-      - name: Send the news api message to osscameroon channel
-        run: |
-          go build
-          ./report_news ${{ secrets.NEWS_API_KEY }} ${{ secrets.TELEGRAM_BOT_TOKEN }} ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
+        with:
+          token: ${{ secrets.GA_WORKFLOW_DEPLOYMENTS_TOKEN }}
 
-      - uses: actions/setup-go@v3
-      - name: Send the news api message to osscameroon group
-        run: ./report_news ${{ secrets.NEWS_API_KEY }} ${{ secrets.TELEGRAM_BOT_TOKEN }} ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }}
+      - name: Send the news api message to osscameroon channel
+        env:
+          NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
+        run: make -s run > news_feed_message
+
+      - name: Dump message
+        run: cat news_feed_message
+
+      - name: send contribution report to osscameroon channel
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message_file: ./.github/workflows/report_news/news_feed_message
+
+      - name: Commit list of the articles we have already shared
+        shell: bash
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com" && \
+          git config --global user.name "github-actions[bot]" && \
+          git add ./report_news.hash && \
+          git commit -m 'update report_news.hash' && \
+          git push origin main
