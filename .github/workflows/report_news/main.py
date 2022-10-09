@@ -10,6 +10,7 @@ TECH_GRIOT_API_URL = 'https://techgriot.co/feed'
 NEWS_API_URL = 'https://newsapi.org/v2/top-headlines?sources=techcrunch'
 NEWS_API_KEY = os.getenv('NEWS_API_KEY')
 REPORT_NEWS_HASHES = 'report_news.hash'
+MAX_ARTICLES = 10
 
 
 def fetch_tech_crunch():
@@ -96,10 +97,10 @@ def build_news() -> Iterable:
     # From each iteration, we shuffle
     random.shuffle(news)
 
-    max_iterations = 5
+    max_iterations = MAX_ARTICLES
     while max_iterations > 0:
         for n in news:
-            if len(result.keys()) == 5:
+            if len(result.keys()) == MAX_ARTICLES:
                 break
 
             news_hash = hash_it(n)
