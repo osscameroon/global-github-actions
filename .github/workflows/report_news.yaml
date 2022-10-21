@@ -3,6 +3,10 @@ on:
   schedule:
     - cron: "0 9 * * *"
 
+env:
+  REPORT_HASH_FILE: ./report_news.hash
+
+
 jobs:
   build:
     defaults:
@@ -31,11 +35,19 @@ jobs:
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message_file: ./.github/workflows/report_news/news_feed_message
 
+      - name: check the size of the hash-list and clean outdated hashes
+        shell: bash
+        run: |
+          # Count the number of lines from the hash file, if it's greater than 100
+          # We remove the top 10 lines hashes from the file
+          [[ $(cat $REPORT_HASH_FILE | wc -l) > 1000 ]] &&\
+          tail -n +990 $REPORT_HASH_FILE > $REPORT_HASH_FILE
+
       - name: Commit list of the articles we have already shared
         shell: bash
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com" && \
           git config --global user.name "github-actions[bot]" && \
-          git add ./report_news.hash && \
+          git add $REPORT_HASH_FILE && \
           git commit -m 'update report_news.hash' && \
           git push origin main
