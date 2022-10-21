@@ -40,8 +40,8 @@ jobs:
         run: |
           # Count the number of lines from the hash file, if it's greater than 100
           # We remove the top 10 lines hashes from the file
-          [[ $(cat $REPORT_HASH_FILE | wc -l) > 100 ]] &&\
-          tail -n +90 $REPORT_HASH_FILE > $REPORT_HASH_FILE
+          [[ $(cat $REPORT_HASH_FILE | wc -l) > 1000 ]] &&\
+          tail -n +990 $REPORT_HASH_FILE > $REPORT_HASH_FILE
 
       - name: Commit list of the articles we have already shared
         shell: bash
