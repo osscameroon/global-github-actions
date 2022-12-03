@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install yamlLint
         shell: bash
-        run: apt-get install yamllint
+        run: sudo apt-get install yamllint
 
       - name: Check gh actions yaml files
         shell: bash
