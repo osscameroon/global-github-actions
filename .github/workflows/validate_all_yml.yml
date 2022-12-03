@@ -1,0 +1,22 @@
+---
+
+name: validate all yaml files
+on: [push]  # yamllint disable-line rule:truthy
+
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: ./.github/workflows
+
+    name: Build and Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install yamlLint
+        shell: bash
+        run: apt-get install yamllint
+
+      - name: Check gh actions yaml files
+        shell: bash
+        run: yamllint . --format auto
