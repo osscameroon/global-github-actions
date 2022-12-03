@@ -4,7 +4,8 @@ name: notify on broken link detected
 on: [workflow_dispatch]  # yamllint disable-line rule:truthy
 
 env:
-  HOST: https://osscameroon.com,\
+  HOST: |
+    https://osscameroon.com,\
     https://blog.osscameroon.com,\
     https://camerapps.com,\
     https://miniyotas.osscameroon.com,\

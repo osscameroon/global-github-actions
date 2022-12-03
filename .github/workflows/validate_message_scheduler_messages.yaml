@@ -2,7 +2,7 @@
 
 name: validate message scheduler messages
 on:  # yamllint disable-line rule:truthy
-  - pull_request:
+  pull_request:
     branches:
       - main
     paths:
