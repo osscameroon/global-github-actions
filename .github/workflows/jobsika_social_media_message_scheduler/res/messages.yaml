@@ -1,8 +1,10 @@
 ---
+# yamllint disable
 
 # the message name or id
 - jobsika_contribute:
-  #the list of target describes where you want your message to be sent it can be
+  # the list of target describes where you want your
+  # message to be sent it can be
   # <twitter OR telegram_group OR telegram_channel >
   targets:
     - twitter

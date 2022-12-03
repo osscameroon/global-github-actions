@@ -1,14 +1,16 @@
 ---
+# yamllint disable
 
 # the message name or id
 - submit_project_ideas:
-  #the list of target describes where you want your message to be sent it can be
+  # the list of target describes where you want your
+  # message to be sent it can be
   # <twitter OR telegram_group OR telegram_channel >
   targets:
     - twitter
   message-en: |
     Hi all,
-    You have a project idea you think the Cameroonian community might benefit from ?
+    You have a project idea you think the Cameroonian community might benefit from ? # yamllint disable-line 
     You can submit this idea to the osscameroon community and we can work on it together.
     Click here to submit
     https://github.com/osscameroon/project-ideas/issues/new?assignees=&labels=&template=project-idea-template.yaml&title=%5Bedit%5D+Your+Project+name

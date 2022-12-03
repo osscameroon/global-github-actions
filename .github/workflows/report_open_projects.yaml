@@ -1,7 +1,9 @@
+---
+
 name: telegram github open projects report
-on:
+on:  # yamllint disable-line rule:truthy
   schedule:
-      - cron: "0 13 15 * *"
+    - cron: "0 13 15 * *"
 
 jobs:
   build:
@@ -24,7 +26,8 @@ jobs:
           to: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           format: MarkdownV2
-          message_file: ./.github/workflows/report_open_projects/open_projects_message
+          message_file: |
+            ./.github/workflows/report_open_projects/open_projects_message
 
       - name: send open projects report to osscameroon group
         uses: appleboy/telegram-action@v0.1.1
@@ -32,4 +35,5 @@ jobs:
           to: ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           format: MarkdownV2
-          message_file: ./.github/workflows/report_open_projects/open_projects_message
+          message_file: |
+            ./.github/workflows/report_open_projects/open_projects_message

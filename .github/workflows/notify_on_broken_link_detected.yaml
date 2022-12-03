@@ -1,9 +1,15 @@
+---
+
 name: notify on broken link detected
-on:
-  workflow_dispatch:
+on: [workflow_dispatch]  # yamllint disable-line rule:truthy
 
 env:
-  HOST: https://osscameroon.com,https://blog.osscameroon.com,https://camerapps.com,https://miniyotas.osscameroon.com,https://devsurvey.osscameroon.com,https://www.prolanghistory.com
+  HOST: https://osscameroon.com,\
+    https://blog.osscameroon.com,\
+    https://camerapps.com,\
+    https://miniyotas.osscameroon.com,\
+    https://devsurvey.osscameroon.com,\
+    https://www.prolanghistory.com
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
