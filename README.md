@@ -20,6 +20,8 @@ All github actions that we run for the entire github organisation
     Using a small quote api to return some random programming quote.
 - [report_jobs](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/report_jobs.yaml)
     Using an open jobs api to fetch some positions and propose that in osscameroon group chat.
+- [report_jokes](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/report_jokes.yaml)
+    Using a free joke api to fetch daily some programming jokes.
 
 
 ## [notify_on_pull_request_open](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/notify_on_pull_request_open.yaml)
