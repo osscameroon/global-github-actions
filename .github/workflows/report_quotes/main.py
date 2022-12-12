@@ -24,7 +24,7 @@ def validate_quote(quote: dict) -> None:
 
 
 def render_quote(quote: dict) -> None:
-    """ We just render on stdout the wuote"""
+    """ We just render on stdout the quote"""
     validate_quote(quote)
 
     print('\n📖 Random Programming Quote \\!')
