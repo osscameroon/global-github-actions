@@ -36,7 +36,7 @@ def render_quote(quote: dict) -> None:
 
 def pick_quote(quotes: list) -> dict:
     """A custom method to 'pick' the quote we want"""
-    return quotes[randint(0, len(quotes))]
+    return random.choice(quotes)
 
 
 if __name__ == '__main__':
