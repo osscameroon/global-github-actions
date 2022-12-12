@@ -1,4 +1,4 @@
-from random import randint
+import random
 import json
 import urllib3
 
