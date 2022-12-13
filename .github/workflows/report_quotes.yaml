@@ -1,3 +1,4 @@
+---
 
 name: telegram quote report
 on:
@@ -13,11 +14,14 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: get quote message and author
-        shell: bash
-        run: |
-          ./report_quotes.sh > report_quote
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.10.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.10.8
+
+      - name: Fetch and render quote
+        run: python main.py > report_quote
 
       - name: send quote report to osscameroon group
         uses: appleboy/telegram-action@v0.1.1
