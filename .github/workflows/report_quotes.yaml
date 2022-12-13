@@ -1,9 +1,9 @@
 ---
 
 name: telegram quote report
-on: [push]
-  # schedule:
-  #   - cron: "0 10 * * *"
+on:
+  schedule:
+    - cron: "0 10 * * *"
 
 jobs:
   build:

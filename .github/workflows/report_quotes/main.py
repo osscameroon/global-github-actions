@@ -27,8 +27,8 @@ def render_quote(quote: dict) -> None:
     """ We just render on stdout the quote"""
     validate_quote(quote)
 
-    print('\n📖 Random Programming Quote \\!')
-    print(f'"{quote.get("en")}"\n')
+    print('\n📖 Random Programming Quote !')
+    print(f'\n"{quote.get("en")}"\n')
     print(f'From {quote.get("author")}\n')
 
 
