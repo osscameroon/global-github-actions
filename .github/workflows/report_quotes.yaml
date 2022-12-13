@@ -21,12 +21,14 @@ jobs:
           python-version: 3.10.8
 
       - name: Fetch and render quote
-        run: python main.py > report_quote
+        run: |
+          pip install urllib3 && \
+          python main.py > report_quote && \
+          cat report_quote
 
       - name: send quote report to osscameroon group
         uses: appleboy/telegram-action@v0.1.1
         with:
           to: ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          format: MarkdownV2
           message_file: ./.github/workflows/report_quotes/report_quote
