@@ -1,5 +1,7 @@
+---
+
 name: telegram github quiz
-on: 
+on:  # yamllint disable-line rule:truthy
   schedule:
     - cron: "0 */10 * * *"
     # Each 10hours to have at least 2 quiz questions per day (24h)
@@ -17,4 +19,5 @@ jobs:
       - name: Send Quiz message to the channel
         shell: bash
         run: |
-          ./report_quiz.sh ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }} ${{ secrets.TELEGRAM_BOT_TOKEN }} ${{ secrets.QUIZAPI_KEY }}
+          ./report_quiz.sh ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }} \
+          ${{ secrets.TELEGRAM_BOT_TOKEN }} ${{ secrets.QUIZAPI_KEY }}

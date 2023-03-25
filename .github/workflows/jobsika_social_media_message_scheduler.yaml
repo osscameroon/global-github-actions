@@ -1,5 +1,7 @@
+---
+
 name: jobsika social media message scheduler
-on:
+on:  # yamllint disable-line rule:truthy
   schedule:
     - cron: "0 15 27 * *"
 
@@ -7,7 +9,8 @@ jobs:
   send-message:
     defaults:
       run:
-        working-directory: ./.github/workflows/jobsika_social_media_message_scheduler
+        working-directory: |
+          ./.github/workflows/jobsika_social_media_message_scheduler
 
     name: Send message
     runs-on: ubuntu-latest

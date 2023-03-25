@@ -1,5 +1,7 @@
+---
+
 name: hermes open source project recommendation
-on:
+on:  # yamllint disable-line rule:truthy
   schedule:
     - cron: "0 8 * * *"
 
@@ -35,6 +37,7 @@ jobs:
 
       - name: send message
         env:
+          # yamllint disable
           GOOGLE_APPLICATION_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_APPLICATION_SERVICE_ACCOUNT }}
           TELEGRAM_TOKEN: ${{ secrets.HERMES_TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
@@ -42,8 +45,10 @@ jobs:
           CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
           API_KEY: ${{ secrets.TWITTER_API_KEY }}
           API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
+          # yamllint enable
 
         run: |
           mkdir .secrets/
-          echo $GOOGLE_APPLICATION_SERVICE_ACCOUNT > ./.secrets/service-account.json
+          echo $GOOGLE_APPLICATION_SERVICE_ACCOUNT \
+          > ./.secrets/service-account.json
           make run

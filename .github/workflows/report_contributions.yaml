@@ -1,5 +1,7 @@
+---
+
 name: telegram github contribution report
-on:
+on:  # yamllint disable-line rule:truthy
   schedule:
     - cron: "30 8 27 * *"
 
@@ -23,7 +25,8 @@ jobs:
       - name: get contribution report
         shell: bash
         run: |
-          GITHUB_TOKEN=${{ secrets.BOT_GITHUB_TOKEN }} ./get_contribution_report.sh > contributions_report_message
+          GITHUB_TOKEN=${{ secrets.BOT_GITHUB_TOKEN }} \
+          ./get_contribution_report.sh > contributions_report_message
 
       - name: send contribution report to osscameroon channel
         uses: appleboy/telegram-action@v0.1.1
@@ -31,7 +34,8 @@ jobs:
           to: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           format: MarkdownV2
-          message_file: ./.github/workflows/report_contributions/contributions_report_message
+          message_file: |
+            ./.github/workflows/report_contributions/contributions_report_message
 
       - name: send contribution report to osscameroon group
         uses: appleboy/telegram-action@v0.1.1
@@ -39,4 +43,5 @@ jobs:
           to: ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           format: MarkdownV2
-          message_file: ./.github/workflows/report_contributions/contributions_report_message
+          message_file: |
+            ./.github/workflows/report_contributions/contributions_report_message

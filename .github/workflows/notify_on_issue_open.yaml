@@ -1,5 +1,7 @@
+---
+
 name: notify of issue creation
-on:
+on:  # yamllint disable-line rule:truthy
   workflow_call:
     secrets:
       telegram_channel_id:
@@ -23,10 +25,12 @@ jobs:
       - name: notify telegram when issue is a created
         shell: bash
         run: |
-          ./build_issue_notification.sh $GITHUB_EVENT_PATH > notify_on_issue_open_message
+          ./build_issue_notification.sh $GITHUB_EVENT_PATH \
+          > notify_on_issue_open_message
       - name: send contribution report to osscameroon channel
         uses: appleboy/telegram-action@v0.1.1
         with:
           to: ${{ secrets.telegram_channel_id }}
           token: ${{ secrets.telegram_token }}
-          message_file: ./.github/workflows/notify_on_issue_open/notify_on_issue_open_message
+          message_file: |
+            ./.github/workflows/notify_on_issue_open/notify_on_issue_open_message

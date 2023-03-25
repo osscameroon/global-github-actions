@@ -4,6 +4,10 @@
 # on:
 #   schedule:
 #     - cron: "0 15 * * *"
+# name: telegram jobs report
+# on:
+#   schedule:
+#     - cron: "0 15 * * *"
 
 # jobs:
 #   build:

@@ -1,5 +1,7 @@
+---
+
 name: telegram github opencollective report
-on:
+on:  # yamllint disable-line rule:truthy
   schedule:
     - cron: "0 13 26 * *"
 
@@ -24,7 +26,8 @@ jobs:
           to: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           format: MarkdownV2
-          message_file: ./.github/workflows/opencollective_contributions/contributions_report_message
+          message_file: |
+            ./.github/workflows/opencollective_contributions/contributions_report_message
 
       - name: send opencollective contribution report to osscameroon group
         uses: appleboy/telegram-action@v0.1.1
@@ -32,4 +35,5 @@ jobs:
           to: ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           format: MarkdownV2
-          message_file: ./.github/workflows/opencollective_contributions/contributions_report_message
+          message_file: |
+            ./.github/workflows/opencollective_contributions/contributions_report_message
