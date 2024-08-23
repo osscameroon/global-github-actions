@@ -8,6 +8,8 @@ source quiz/functions.sh
 # load environement variables
 source env.sh
 
+mkdir -p database
+
 if [ -z ${TELEGRAM_BOT_TOKEN} ]; then
 	echo "TELEGRAM_BOT_TOKEN is not set!"
     exit
@@ -20,16 +22,18 @@ elif [ -z ${QUIZAPI_KEY} ]; then
 fi
 
 # incomming parameters
-MAX_LENGTH=100
 skipped_quizzes=0
+tempfile=$(tempfile)
 
 
 while [ $skipped_quizzes -lt 3 ]; do
     # We verify if the quiz has been proposed successfully
-    if propose_quiz; then
+    if propose_quiz > ${tempfile}; then
+        # Save the quiz data in the database
+        filename=$(jq -r '.poll_id' ${tempfile} -r)
+        mv ${tempfile} database/${filename}.json
         break
     else
         skipped_quizzes=$(expr $skipped_quizzes + 1)
     fi
 done
-
