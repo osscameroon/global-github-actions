@@ -25,8 +25,14 @@ fi
 skipped_quizzes=0
 tempfile=$(tempfile)
 
-# start a new quiz
-start_quiz(){
+# inform about a new round of quiz
+start_quiz_competition(){
+    # TODO
+    return 1
+}
+
+# send a quiz
+send_quiz(){
     while [ $skipped_quizzes -lt 3 ]; do
         # We verify if the quiz has been proposed successfully
         if propose_quiz > ${tempfile}; then
@@ -40,7 +46,8 @@ start_quiz(){
     done
 }
 
-fetch_quiz_data(){
+# update quiz data based on user answers submission
+fetch_quiz_user_answers(){
     # get previous quiz user answers
     user_answers=$(get_user_answers)
 
@@ -52,4 +59,13 @@ fetch_quiz_data(){
         jq ".user_answers = (.user_answers + ${quiz_user_answers} | unique_by(.username))" ${quiz_data_file} > ${tempfile}
         mv ${tempfile} ${quiz_data_file}
     done
+}
+
+# stop the current round of quiz
+stop_quiz_competition(){
+    # TODO: stop all the active quizzes
+    # TODO: compute score
+    # TODO: generate leaderboard
+    # TODO: move all the current quiz_data in the archive folder
+    return 1
 }
