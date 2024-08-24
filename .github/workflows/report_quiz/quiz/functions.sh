@@ -75,3 +75,12 @@ get_user_answers(){
     curl -s -d "${payload}" -H "Content-Type: application/json" -X POST https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates 2>/dev/null | \
     jq '.result | map(select(.poll_answer and .poll_answer.user.is_bot == false)) | group_by(.poll_answer.poll_id) | map({key: .[0].poll_answer.poll_id, value: map({first_name: .poll_answer.user.first_name, username: .poll_answer.user.username, options_ids: .poll_answer.option_ids})}) | from_entries'
 }
+
+# Close a poll
+close_poll(){
+    payload="{\"chat_id\": ${TELEGRAM_CHAT_ID}, \"message_id\": $1}"
+    # echo "msg-payload: ${payload}"
+    # echo "----------------------------------------------"
+
+    curl -s -d "${payload}" -H "Content-Type: application/json" -X POST https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/stopPoll 2>/dev/null
+}

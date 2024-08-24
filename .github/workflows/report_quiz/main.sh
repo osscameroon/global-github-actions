@@ -64,12 +64,18 @@ fetch_quiz_user_answers(){
 
 # stop the current round of quiz
 stop_quiz_competition(){
-    # TODO: stop all the active quizzes
-    
-    # TODO: compute score and generate leaderboard
-    send_message "$(escp $(compute_total_score database/*.json | generate_leaderboard))"
+    quiz_data_files=$(ls database/*.json || return)
 
-    # TODO: move all the current quiz_data in the archive folder
-    #mkdir -p archive
-    #mv database/*.json archive
+    # stop all the active quizzes
+    for quiz_data_file in ${quiz_data_files}; do
+        close_poll $(jq -r '.message_id' ${quiz_data_file})
+    done
+
+    # compute score and generate leaderboard
+    send_message "$(escp $(compute_total_score ${quiz_data_files} | generate_leaderboard))"
+
+    # move all the current quiz_data in the archive folder
+    timestamp=$(date +%s)
+    mkdir -p archive/${timestamp}
+    mv ${quiz_data_files} archive/${timestamp}
 }
