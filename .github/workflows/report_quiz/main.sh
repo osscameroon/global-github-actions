@@ -4,6 +4,7 @@ set -e
 
 # load functions
 source quiz/functions.sh
+source leaderboard/functions.sh
 
 # load environement variables
 source env.sh
@@ -64,8 +65,11 @@ fetch_quiz_user_answers(){
 # stop the current round of quiz
 stop_quiz_competition(){
     # TODO: stop all the active quizzes
-    # TODO: compute score
-    # TODO: generate leaderboard
+    
+    # TODO: compute score and generate leaderboard
+    send_message "$(escp $(compute_total_score database/*.json | generate_leaderboard))"
+
     # TODO: move all the current quiz_data in the archive folder
-    return 1
+    #mkdir -p archive
+    #mv database/*.json archive
 }
