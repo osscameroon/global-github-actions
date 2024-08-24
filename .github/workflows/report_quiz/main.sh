@@ -71,9 +71,35 @@ stop_quiz_competition(){
         close_poll $(jq -r '.message_id' ${quiz_data_file})
     done
 
-    # compute score and generate leaderboard
-    send_message "$(escp $(compute_total_score ${quiz_data_files} | generate_leaderboard))"
+    # determine round
+    round=$(expr $(ls archive | wc -l | cut -d' ' -f1) + 1)
+    # compute score
+    quiz_data_score=$(compute_total_score ${quiz_data_files})
+    # get first users and first price
+    first_users=$(jq -r '.[0].value | map("@"+.username) | join(", ")' <<< ${quiz_data_score})
+    first_price=$(jq -r '.[0].price' <<< ${quiz_data_score})
+    # generate leaderboard
+    leaderboard=$(generate_leaderboard <<< ${quiz_data_score})
 
+    # announce the winners
+    message="🏆 OSSCameroon Quiz Competition, Round ${round}: Results\n\n
+
+We are pleased to announce that ${first_users}, who boasts the best total score, have been promoted to 🥇1st PLACE and secured a ${first_price} yotas!\n\n
+
+The Final Score for each submission was calculated based on their total correct quizzes.\n\n
+
+Meet the winners!\n\n
+
+${leaderboard}\n\n
+
+Congratulations, and thank you to all who participated!\n\n
+
+For further details, you can ask help in the OSS Cameroun telegram group.
+"
+
+    send_message "$(escp ${message})"
+
+    # end the competition
     # move all the current quiz_data in the archive folder
     timestamp=$(date +%s)
     mkdir -p archive/${timestamp}
