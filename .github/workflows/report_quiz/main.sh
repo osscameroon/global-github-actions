@@ -56,7 +56,7 @@ fetch_quiz_user_answers(){
         poll_id=$(cut -d '.' -f 1 <(basename ${quiz_data_file}))
         quiz_user_answers=$(jq ".[\"${poll_id}\"]" <<< ${user_answers})
         # update quiz_data in ensuring unqie answer per user
-        jq ".user_answers = (.user_answers + ${quiz_user_answers} | unique_by(.username))" ${quiz_data_file} > ${tempfile}
+        jq ".user_answers = ((.user_answers // []) + ${quiz_user_answers} | unique_by(.username))" ${quiz_data_file} > ${tempfile}
         mv ${tempfile} ${quiz_data_file}
     done
 }
