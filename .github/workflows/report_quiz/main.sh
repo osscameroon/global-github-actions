@@ -26,10 +26,23 @@ fi
 skipped_quizzes=0
 tempfile=$(tempfile)
 
+# determine round
+get_current_round(){
+    expr $(ls archive | wc -l | cut -d' ' -f1) + 1
+}
+
 # inform about a new round of quiz
 start_quiz_competition(){
     # TODO
-    return 1
+    message="🏆 OSSCameroon Quiz Competition, Round $(get_current_round): Submissions\n\n
+
+QuizBot is now ready to accept submissions for the OSSCameroon Quiz Competition, Round.\n\n
+
+Q: How to participate\n
+A: QuizBot will send quizzes daily, you should check frequently the messages in the OSS Cameroun telegram group.
+"""
+    
+    send_message "$(escp ${message})"
 }
 
 # send a quiz
@@ -71,8 +84,6 @@ stop_quiz_competition(){
         close_poll $(jq -r '.message_id' ${quiz_data_file})
     done
 
-    # determine round
-    round=$(expr $(ls archive | wc -l | cut -d' ' -f1) + 1)
     # compute score
     quiz_data_score=$(compute_total_score ${quiz_data_files})
     # get first users and first price
@@ -82,7 +93,7 @@ stop_quiz_competition(){
     leaderboard=$(generate_leaderboard <<< ${quiz_data_score})
 
     # announce the winners
-    message="🏆 OSSCameroon Quiz Competition, Round ${round}: Results\n\n
+    message="🏆 OSSCameroon Quiz Competition, Round $(get_current_round): Results\n\n
 
 We are pleased to announce that ${first_users}, who boasts the best total score, have been promoted to 🥇1st PLACE and secured a ${first_price} yotas!\n\n
 
