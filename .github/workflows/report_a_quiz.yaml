@@ -3,6 +3,8 @@ on:
   schedule:
     - cron: "0 */10 * * *"
     # Each 10hours to have at least 2 quiz questions per day (24h)
+    # Note that this cron value will influence the behavior of the report_quiz
+    # make sure to check the overall working after each modification
 
 jobs:
   build:
@@ -14,7 +16,45 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+      - name: Config the environment variable
+        shell: bash
+        run: |
+          echo "TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}" >>> env.sh
+          echo "TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }}" >>> env.sh
+          echo "QUIZAPI_KEY=${{ secrets.QUIZAPI_KEY }}" >>> env.sh
+      
       - name: Send Quiz message to the channel
         shell: bash
         run: |
-          ./report_quiz.sh ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }} ${{ secrets.TELEGRAM_BOT_TOKEN }} ${{ secrets.QUIZAPI_KEY }}
+          source main.sh
+          # send a new quiz
+          send_quiz
+      
+      - name: Fetch quizzes user answers
+        shell: bash
+        run: |
+          source main.sh
+          # update the quiz database
+          fetch_quiz_user_answers
+      
+      - name: Check if the status of the competition
+        shell: bash
+        run: |
+          source main.sh
+          # start a new competition each monday morning
+          if [ $(date +%a_%p) == Mon_AM ]; then start_quiz_competition; fi
+          # end the competition each sunday evening
+          if [ $(date +%a_%p) == Sun_PM ]; then stop_quiz_competition; fi
+
+      - name: Commit report_quiz change
+        shell: bash
+        run: |
+          if git status; then
+            git config user.username=osscameroon
+            if [ -d database ]; then git add database; fi
+            if [ -d archive ]; then git add archive; fi
+            git commit -m "update the data"
+            git push origin main
+          fi
+
+            
