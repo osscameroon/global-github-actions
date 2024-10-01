@@ -2,14 +2,20 @@
 
 set -e
 
+BASE_DIR=$(dirname "${BASH_SOURCE[0]}")
+DATABASE_DIR="${BASE_DIR}/database"
+ARCHIVE_DIR="${BASE_DIR}/archive"
+TEMPFILE="$(mktemp)"
+
 # load functions
-source quiz/functions.sh
-source leaderboard/functions.sh
+source "${BASE_DIR}/common/utils.sh"
+source "${BASE_DIR}/quiz/functions.sh"
+source "${BASE_DIR}/leaderboard/functions.sh"
 
 # load environement variables
-source env.sh
+source "${BASE_DIR}/env.sh"
 
-mkdir -p database
+mkdir -p "${BASE_DIR}/database"
 
 if [ -z ${TELEGRAM_BOT_TOKEN} ]; then
 	echo "TELEGRAM_BOT_TOKEN is not set!"
@@ -24,16 +30,18 @@ fi
 
 # incomming parameters
 skipped_quizzes=0
-tempfile=$(tempfile)
 
 # determine round
 get_current_round(){
-    expr $(ls archive | wc -l | cut -d' ' -f1) + 1
+    if [ -d ${ARCHIVE_DIR} ]; then
+        expr $(ls ${ARCHIVE_DIR} | wc -l | cut -d' ' -f1) + 1
+    else
+	echo 1
+    fi
 }
 
 # inform about a new round of quiz
 start_quiz_competition(){
-    # TODO
     message="🏆 OSSCameroon Quiz Competition, Round $(get_current_round): Submissions\n\n
 
 QuizBot is now ready to accept submissions for the OSSCameroon Quiz Competition, Round.\n\n
@@ -49,10 +57,10 @@ A: QuizBot will send quizzes daily, you should check frequently the messages in 
 send_quiz(){
     while [ $skipped_quizzes -lt 3 ]; do
         # We verify if the quiz has been proposed successfully
-        if propose_quiz > ${tempfile}; then
+        if propose_quiz > ${TEMPFILE}; then
             # Save the quiz data in the database
-            filename=$(jq -r '.poll_id' ${tempfile} -r)
-            mv ${tempfile} database/${filename}.json
+            filename=$(jq -r '.poll_id' ${TEMPFILE} -r)
+            mv ${TEMPFILE} "${DATABASE_DIR}/${filename}.json"
             break
         else
             skipped_quizzes=$(expr $skipped_quizzes + 1)
@@ -62,22 +70,24 @@ send_quiz(){
 
 # update quiz data based on user answers submission
 fetch_quiz_user_answers(){
+    test -f ${DATABASE_DIR}/*.json || return 0
     # get previous quiz user answers
     user_answers=$(get_user_answers)
 
     # we save the quiz user answers
-    for quiz_data_file in $(ls database/*.json); do
+    for quiz_data_file in $(ls ${DATABASE_DIR}/*.json); do
         poll_id=$(cut -d '.' -f 1 <(basename ${quiz_data_file}))
         quiz_user_answers=$(jq ".[\"${poll_id}\"]" <<< ${user_answers})
         # update quiz_data in ensuring unqie answer per user
-        jq ".user_answers = ((.user_answers // []) + ${quiz_user_answers} | unique_by(.username))" ${quiz_data_file} > ${tempfile}
-        mv ${tempfile} ${quiz_data_file}
+        jq ".user_answers = ((.user_answers // []) + ${quiz_user_answers} | unique_by(.username))" ${quiz_data_file} > ${TEMPFILE}
+        mv ${TEMPFILE} ${quiz_data_file}
     done
 }
 
 # stop the current round of quiz
 stop_quiz_competition(){
-    quiz_data_files=$(ls database/*.json || return)
+    test -f ${DATABASE_DIR}/*.json || return 0
+    quiz_data_files=$(ls ${DATABASE_DIR}/*.json)
 
     # stop all the active quizzes
     for quiz_data_file in ${quiz_data_files}; do
@@ -113,6 +123,6 @@ For further details, you can ask help in the OSS Cameroun telegram group.
     # end the competition
     # move all the current quiz_data in the archive folder
     timestamp=$(date +%s)
-    mkdir -p archive/${timestamp}
-    mv ${quiz_data_files} archive/${timestamp}
+    mkdir -p "${ARCHIVE_DIR}/${timestamp}"
+    mv ${quiz_data_files} "${ARCHIVE_DIR}/${timestamp}"
 }

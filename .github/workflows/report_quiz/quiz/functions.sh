@@ -1,9 +1,7 @@
 MAX_LENGTH=100
+BASE_DIR=$(dirname $(dirname "${BASH_SOURCE[0]}")..)
 
-# To escapes some stupid quotes
-escp(){
-    echo -e \"$(printf '%q' "$*")\"
-}
+source "${BASE_DIR}/common/utils.sh"
 
 # to fetch programming questions
 get_quiz_questions_answers() {
