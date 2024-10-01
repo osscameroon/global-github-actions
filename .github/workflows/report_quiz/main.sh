@@ -34,7 +34,7 @@ skipped_quizzes=0
 # determine round
 get_current_round(){
     if [ -d ${ARCHIVE_DIR} ]; then
-        expr $(ls ${ARCHIVE_DIR} | wc -l | cut -d' ' -f1) + 1
+        expr $(ls ${ARCHIVE_DIR} | wc -l) + 1
     else
 	echo 1
     fi
@@ -59,8 +59,10 @@ send_quiz(){
         # We verify if the quiz has been proposed successfully
         if propose_quiz > ${TEMPFILE}; then
             # Save the quiz data in the database
-            filename=$(jq -r '.poll_id' ${TEMPFILE} -r)
-            mv ${TEMPFILE} "${DATABASE_DIR}/${filename}.json"
+            filename=$(jq -r '.poll_id // empty' ${TEMPFILE} -r)
+            if [ ! -z "${filename}" ]; then
+                mv ${TEMPFILE} "${DATABASE_DIR}/${filename}.json"
+            fi
             break
         else
             skipped_quizzes=$(expr $skipped_quizzes + 1)
@@ -70,7 +72,7 @@ send_quiz(){
 
 # update quiz data based on user answers submission
 fetch_quiz_user_answers(){
-    test -f ${DATABASE_DIR}/*.json || return 0
+    test $(ls ${DATABASE_DIR}/*.json | wc -l) -eq 0 && return 0
     # get previous quiz user answers
     user_answers=$(get_user_answers)
 
@@ -86,7 +88,7 @@ fetch_quiz_user_answers(){
 
 # stop the current round of quiz
 stop_quiz_competition(){
-    test -f ${DATABASE_DIR}/*.json || return 0
+    test $(ls ${DATABASE_DIR}/*.json | wc -l) -eq 0 && return 0
     quiz_data_files=$(ls ${DATABASE_DIR}/*.json)
 
     # stop all the active quizzes
