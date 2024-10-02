@@ -23,7 +23,13 @@ jobs:
           echo "TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }}" >>> env.sh
           echo "QUIZAPI_KEY=${{ secrets.QUIZAPI_KEY }}" >>> env.sh
       
-      - name: Send Quiz message to the channel
+      - name: Load the database
+        uses: actions/checkout@master
+        with:
+          repository: osscameroon/reportquiz_data
+          path: .
+
+      - name: Send quiz to the group
         shell: bash
         run: |
           source main.sh
@@ -37,7 +43,7 @@ jobs:
           # update the quiz database
           fetch_quiz_user_answers
       
-      - name: Check if the status of the competition
+      - name: Check the status of the competition
         shell: bash
         run: |
           source main.sh
@@ -46,15 +52,13 @@ jobs:
           # end the competition each sunday evening
           if [ $(date +%a_%p) == Sun_PM ]; then stop_quiz_competition; fi
 
-      - name: Commit report_quiz change
+      - name: Update the database
         shell: bash
         run: |
-          if git status; then
-            git config user.username=osscameroon
-            if [ -d database ]; then git add database; fi
-            if [ -d archive ]; then git add archive; fi
-            git commit -m "update the data"
+          if git status archive database --ignored; then
+            if [ -d database ]; then git add database -f; fi
+            if [ -d archive ]; then git add archive -f; fi
+            git commit -m "update"
             git push origin main
           fi
 
-            
