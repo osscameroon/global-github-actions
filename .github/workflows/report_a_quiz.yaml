@@ -59,7 +59,7 @@ jobs:
       - name: Update the database
         shell: bash
         run: |
-          if git status archive database --ignored; then
+          if [ ! -z "$(git status -s --ignored archive database)" ]; then
             git config user.name "osscameroon"
             git config user.email "bot@osscameroon.com"
             if [ -d database ]; then git add database -f; fi
