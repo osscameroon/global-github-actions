@@ -40,8 +40,16 @@ get_current_round(){
     fi
 }
 
+# whether there is a ongoing competition
+has_ongoing_competition() {
+    test $(ls ${DATABASE_DIR}/*.json | wc -l) -ne 0
+}
+
 # inform about a new round of quiz
 start_quiz_competition(){
+    # can't start a competition if there is a ongoing one
+    has_ongoing_competition && return 0
+
     message="🏆 OSSCameroon Quiz Competition, Round $(get_current_round): Submissions\n\n
 
 QuizBot is now ready to accept submissions for the OSSCameroon Quiz Competition, Round.\n\n
@@ -72,7 +80,9 @@ send_quiz(){
 
 # update quiz data based on user answers submission
 fetch_quiz_user_answers(){
-    test $(ls ${DATABASE_DIR}/*.json | wc -l) -eq 0 && return 0
+    # require a ongoing competition
+    has_ongoing_competition || return 0
+
     # get previous quiz user answers
     user_answers=$(get_user_answers)
 
@@ -88,7 +98,10 @@ fetch_quiz_user_answers(){
 
 # stop the current round of quiz
 stop_quiz_competition(){
-    test $(ls ${DATABASE_DIR}/*.json | wc -l) -eq 0 && return 0
+    # require a ongoing competition
+    has_ongoing_competition || return 0
+
+    # enumerate quiz data
     quiz_data_files=$(ls ${DATABASE_DIR}/*.json)
 
     # stop all the active quizzes
