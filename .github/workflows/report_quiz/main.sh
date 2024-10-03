@@ -112,14 +112,27 @@ stop_quiz_competition(){
 
     # compute score
     quiz_data_score=$(compute_total_score ${quiz_data_files})
-    # get first users and first price
-    first_users=$(jq -r '.[0].value | map("@"+.username) | join(", ")' <<< ${quiz_data_score})
-    first_price=$(jq -r '.[0].price' <<< ${quiz_data_score})
-    # generate leaderboard
-    leaderboard=$(generate_leaderboard <<< ${quiz_data_score})
 
     # announce the winners
-    message="🏆 OSSCameroon Quiz Competition, Round $(get_current_round): Results\n\n
+    message="🏆 OSSCameroon Quiz Competition, Round $(get_current_round): Results\n\n"
+
+    # check if we have a result
+    if [ ${quiz_data_score} == '[]' ]; then
+        message="${message}
+
+And the winner is... drumroll please... absolutely no one! 🥲
+
+Apparently, silence won by a landslide. Congrats to Nobody for their flawless participation! 🎉
+
+Guess it's time for us to start offering free pizza as prizes. 🍕"
+    else
+        # get first users and first price
+        first_users=$(jq -r '.[0].value | map("@"+.username) | join(", ")' <<< ${quiz_data_score})
+        first_price=$(jq -r '.[0].price' <<< ${quiz_data_score})
+        # generate leaderboard
+        leaderboard=$(generate_leaderboard <<< ${quiz_data_score})
+
+        message="${message}
 
 We are pleased to announce that ${first_users}, who boasts the best total score, have been promoted to 🥇1st PLACE and secured a ${first_price} yotas!\n\n
 
@@ -130,6 +143,10 @@ Meet the winners!\n\n
 ${leaderboard}\n\n
 
 Congratulations, and thank you to all who participated!\n\n
+"
+    fi
+
+    message="$message
 
 For further details, you can ask help in the OSS Cameroun telegram group.
 "
