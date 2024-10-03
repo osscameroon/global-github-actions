@@ -106,7 +106,8 @@ stop_quiz_competition(){
 
     # stop all the active quizzes
     for quiz_data_file in ${quiz_data_files}; do
-        close_poll $(jq -r '.message_id' ${quiz_data_file})
+        # shouldn't break the operation in case of that a poll is already closed
+        close_poll $(jq -r '.message_id' ${quiz_data_file}) || true
     done
 
     # compute score
