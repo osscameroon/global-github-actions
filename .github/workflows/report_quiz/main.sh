@@ -114,15 +114,15 @@ stop_quiz_competition(){
     quiz_data_score=$(compute_total_score ${quiz_data_files})
 
     # announce the winners
-    message="🏆 OSSCameroon Quiz Competition, Round $(get_current_round): Results\n\n"
+    message="🏆 OSSCameroon Quiz Competition, Round $(get_current_round): Results"
 
     # check if we have a result
     if [ ${quiz_data_score} == '[]' ]; then
-        message="${message}
+        message="${message}\n\n
 
-And the winner is... drumroll please... absolutely no one! 🥲
+And the winner is... drumroll please... absolutely no one! 🥲\n\n
 
-Apparently, silence won by a landslide. Congrats to Nobody for their flawless participation! 🎉
+Apparently, silence won by a landslide. Congrats to Nobody for their flawless participation! 🎉\n\n
 
 Guess it's time for us to start offering free pizza as prizes. 🍕"
     else
@@ -132,7 +132,7 @@ Guess it's time for us to start offering free pizza as prizes. 🍕"
         # generate leaderboard
         leaderboard=$(generate_leaderboard <<< ${quiz_data_score})
 
-        message="${message}
+        message="${message}\n\n
 
 We are pleased to announce that ${first_users}, who boasts the best total score, have been promoted to 🥇1st PLACE and secured a ${first_price} yotas!\n\n
 
