@@ -96,9 +96,9 @@ def fetch_peef():
                 body = response.read().decode()
             
             # Parse the HTML data
-            description = re.findall(r"<article.*?>(.*)</article>", body.replace('\n', ''))
+            description = re.findall(r"<article.*?>(.*?)</article>", body.replace('\n', ''))
             if not description:
-                print("Error: Article not found", file=sys.stderr)
+                print("Error: Unable to parse the article", file=sys.stderr)
                 continue
 
             description = description[0]
