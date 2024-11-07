@@ -95,8 +95,14 @@ def fetch_peef():
             with urlopen(link) as response:
                 body = response.read().decode()
             
-            # Parse the XML data
-            description = re.findall(r"<article.*?>.*</article>", body.replace('\n', ''))[0]
+            # Parse the HTML data
+            description = re.findall(r"<article.*?>(.*)</article>", body.replace('\n', ''))
+            if not description:
+                print("Error: Article not found", file=sys.stderr)
+                continue
+
+            description = description[0]
+            # Clean the data
             description = re.sub(r"<.*?>", "", description).strip()[:255]
         except HTTPError as e:
             continue
