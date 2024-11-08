@@ -85,7 +85,8 @@ def fetch_peef():
         link = re.sub(r'^http://', 'https://', urlquote(loc.text, safe=":/"))
         pub_date = lastmod.text
 
-        if not link.startswith("https://peef.dev/post/"):
+        # A peef article in under the form https://peef.dev/post/<author>/<slug>
+        if not link.startswith("https://peef.dev/post/") or link.strip("/").count("/") != 5:
             continue
 
         author, title = link.split("/")[4:6]
