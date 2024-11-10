@@ -73,7 +73,7 @@ def fetch_tericcabrel_blog() -> list:
     xml_raw = ET.fromstring(body)
     articles = []
 
-    for url in xml_raw.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url')[-MAX_ARTICLES:]:
+    for url in xml_raw.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url')[:MAX_ARTICLES]:
         loc = url.find('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')
         lastmod = url.find('{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod')
 
