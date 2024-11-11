@@ -37,7 +37,7 @@ jobs:
           # update the quiz database
           fetch_quiz_user_answers
 
-      - name: Check the status of the competition
+      - name: Automate the management of the competition
         shell: bash
         run: |
           source main.sh
