@@ -35,6 +35,14 @@ jobs:
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message_file: ./.github/workflows/report_news/news_feed_message
 
+      - name: check the size of the hash-list and clean outdated hashes
+        shell: bash
+        run: |
+          # Count the number of lines from the hash file, if it's greater than 100
+          # We remove the top 10 lines hashes from the file
+          [[ $(cat $REPORT_HASH_FILE | wc -l) > 1000 ]] &&\
+          tail -n +990 <<< $(cat $REPORT_HASH_FILE) > $REPORT_HASH_FILE
+
       - name: Commit list of the articles we have already shared
         shell: bash
         run: |
