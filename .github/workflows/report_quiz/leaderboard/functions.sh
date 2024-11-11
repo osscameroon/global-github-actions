@@ -5,5 +5,5 @@ compute_total_score(){
 
 # genarate a textual leaderboard with price
 generate_leaderboard(){
-    jq -r '["1st", "2nd", "3rd", "4th", "5th"] as $rangs | ["🥇", "🥈", "🥉", "🎖️"] as $badges | map(.key as $key | [([$rangs[.key], "PLACE", "-", .price, "yotas"] | join(" ")), (.value | map([$badges[$key], .first_name, "("+"@"+.username+")"] | join(" ")) | sort)] | flatten | join("\\n")) | join("\\n\\n")' $1
+    jq -r '["1st", "2nd", "3rd", "4th", "5th"] as $ranks | ["🥇", "🥈", "🥉", "🎖️"] as $badges | map(.key as $key | [([$ranks[.key], "PLACE", "-", .price, "yotas"] | join(" ")), (.value | map([$badges[$key], .first_name, "("+"@"+.username+")"] | join(" ")) | sort)] | flatten | join("\\n")) | join("\\n\\n")' $1
 }
