@@ -2,13 +2,17 @@ import json
 from hashlib import sha1
 import random
 import os
+import re
 from typing import Iterable
 from urllib.request import urlopen
+from urllib.parse import quote as urlquote
+from urllib.error import HTTPError
 import xml.etree.ElementTree as ET
 
 TECH_GRIOT_API_URL = 'https://techgriot.co/feed'
 NEWS_API_URL = 'https://newsapi.org/v2/top-headlines?sources=techcrunch'
 NEWS_API_KEY = os.getenv('NEWS_API_KEY')
+TERICCABREL_BLOG_SITEMAP_URL = "https://blog.tericcabrel.com/sitemap-posts.xml"
 REPORT_NEWS_HASHES = 'report_news.hash'
 MAX_ARTICLES = 10
 
@@ -58,6 +62,58 @@ def fetch_tech_griot() -> list:
     return articles
 
 
+def fetch_tericcabrel_blog() -> list:
+    """
+    fetching articles from tericcabrel blog
+    """
+
+    with urlopen(TERICCABREL_BLOG_SITEMAP_URL) as response:
+        body = response.read()
+
+    xml_raw = ET.fromstring(body)
+    articles = []
+
+    for url in xml_raw.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url')[:MAX_ARTICLES]:
+        loc = url.find('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')
+        lastmod = url.find('{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod')
+
+        if loc is None or lastmod is None:
+            continue
+
+        link = re.sub(r'^http://', 'https://', urlquote(loc.text, safe=":/"))
+        pub_date = lastmod.text
+
+        try:
+            with urlopen(link) as response:
+                body = response.read().decode()
+
+            body = body.replace('\n', '')
+
+            # Parse the HTML data
+            title = re.findall(r'<h1 class="article-title">(.*?)</h1>', body)
+            description = re.findall(r'<section class="gh-content gh-canvas">(.*?)</section>', body)
+
+            if not title or not description:
+                print("Error: Unable to parse the article", file=sys.stderr)
+                continue
+
+            title = title[0]
+            description = description[0]
+            # Clean the data
+            description = re.sub(r"<.*?>", "", description).strip()[:255]
+        except HTTPError as e:
+            continue
+
+        articles.append({
+            'title': title,
+            'link': link,
+            'description': description,
+            'pub_date': pub_date,
+        })
+
+    return articles
+
+
 def hash_it(info: dict) -> str:
     """
     This method takes as input a dictionnary, then dumps it into string
@@ -91,7 +147,7 @@ def build_news() -> Iterable:
     We build news
     """
     result = {}
-    news = fetch_tech_crunch() + fetch_tech_griot()
+    news = fetch_tech_crunch() + fetch_tech_griot() + fetch_tericcabrel_blog()
     # we extract hashes from the file as a dict
     hashes = extract_hash()
     # From each iteration, we shuffle
