@@ -19,10 +19,10 @@ jobs:
           repository: osscameroon/osscameroon-website
           path: osscameroon-website
 
-      - name: Set up Python 3.8
+      - name: Set up Python 3.12
         uses: actions/setup-python@v6
         with:
-          python-version: 3.8
+          python-version: 3.12
 
       - name: Install dependencies
         run: |

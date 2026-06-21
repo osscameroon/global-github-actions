@@ -12,7 +12,7 @@ jobs:
     name: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v7
       - name: get number of yotas of each member
         run: python extract.py > members_yotas_message
 
