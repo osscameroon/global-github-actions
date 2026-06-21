@@ -4,12 +4,16 @@ import random
 import os
 from typing import Iterable
 from urllib.request import urlopen
+from urllib.error import HTTPError
+from urllib.parse import quote as urlquote
 import xml.etree.ElementTree as ET
+import re
 
 TECH_GRIOT_API_URL = 'https://techgriot.co/feed'
 NEWS_API_URL = 'https://newsapi.org/v2/top-headlines?sources=techcrunch'
 NEWS_API_KEY = os.getenv('NEWS_API_KEY')
 REPORT_NEWS_HASHES = 'report_news.hash'
+PEEF_SITEMAP_URL = 'https://peef.dev/sitemap.xml'
 MAX_ARTICLES = 10
 
 
@@ -58,6 +62,63 @@ def fetch_tech_griot() -> list:
     return articles
 
 
+def fetch_peef():
+    """
+    Fetching data from peef
+    """
+
+    url = f'{PEEF_SITEMAP_URL}'
+
+    with urlopen(url) as response:
+        body = response.read()
+
+    xml_raw = ET.fromstring(body)
+
+    articles = []
+    for url in xml_raw.findall('{http://www.sitemaps.org/schemas/sitemap/0.9}url')[-MAX_ARTICLES:]:
+        loc = url.find('{http://www.sitemaps.org/schemas/sitemap/0.9}loc')
+        lastmod = url.find('{http://www.sitemaps.org/schemas/sitemap/0.9}lastmod')
+
+        if loc is None or lastmod is None:
+            continue
+
+        link = re.sub(r'^http://', 'https://', urlquote(loc.text, safe=":/"))
+        pub_date = lastmod.text
+
+        # A peef article in under the form https://peef.dev/post/<author>/<slug>
+        if not link.startswith("https://peef.dev/post/") or link.strip("/").count("/") != 5:
+            continue
+
+        author, title = link.split("/")[4:6]
+        title = title.replace('-', ' ').capitalize()
+
+        try:
+            with urlopen(link) as response:
+                body = response.read().decode()
+            
+            # Parse the HTML data
+            description = re.findall(r"<article.*?>(.*?)</article>", body.replace('\n', ''))
+            if not description:
+                print("Error: Unable to parse the article", file=sys.stderr)
+                continue
+
+            description = description[0]
+            # Clean the data
+            description = re.sub(r"<.*?>", "", description).strip()[:255]
+        except HTTPError as e:
+            continue
+
+        articles.append({
+            'author': author,
+            'title': title,
+            'link': link,
+            'description': description,
+            'pub_date': pub_date,
+        })
+
+    return articles
+
+
 def hash_it(info: dict) -> str:
     """
     This method takes as input a dictionnary, then dumps it into string
@@ -91,7 +152,7 @@ def build_news() -> Iterable:
     We build news
     """
     result = {}
-    news = fetch_tech_crunch() + fetch_tech_griot()
+    news = fetch_tech_crunch() + fetch_tech_griot() +  fetch_peef()
     # we extract hashes from the file as a dict
     hashes = extract_hash()
     # From each iteration, we shuffle
@@ -133,4 +194,5 @@ TODO:
 
 if __name__ == '__main__':
     print(format_str())
+
 
