@@ -16,7 +16,7 @@ jobs:
     name: Build And Send
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
         with:
           token: ${{ secrets.GA_WORKFLOW_DEPLOYMENTS_TOKEN }}
 

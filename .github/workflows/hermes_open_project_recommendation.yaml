@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout osscameroon-website
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
         with:
           token: ${{ secrets.GA_WORKFLOW_DEPLOYMENTS_TOKEN }}
           repository: osscameroon/osscameroon-website
