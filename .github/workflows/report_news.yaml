@@ -6,12 +6,18 @@ on:
 env:
   REPORT_HASH_FILE: ./report_news.hash
 
+# Needed by the final `git push origin main` step that updates report_news.hash.
+permissions:
+  contents: write
+
+# Single-in-flight per branch; safe because the next run rebuilds
+# report_news.hash from the same upstream APIs, so a cancelled run loses no data.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
-    permissions:
-      contents: write
-
     defaults:
       run:
         working-directory: ./.github/workflows/report_news
