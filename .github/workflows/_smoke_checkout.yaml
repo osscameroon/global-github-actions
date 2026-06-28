@@ -1,0 +1,28 @@
+name: _smoke_checkout
+on:
+  schedule:
+    # 05:00 UTC daily — ~3h before the earliest morning cron (hermes @ 08:00 UTC)
+    # so a checkout regression fails before production workflows fire.
+    - cron: "0 5 * * *"
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    name: Smoke
+    runs-on: ubuntu-latest
+
+    # contents: read only — we only check out, never push.
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout (default GITHUB_TOKEN)
+        uses: actions/checkout@v7
+
+      - name: Verify checkout succeeded
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f README.md
+          test -d .github/workflows
+          echo "smoke OK: HEAD=$(git rev-parse HEAD)"

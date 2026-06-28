@@ -6,6 +6,15 @@ on:
 env:
   REPORT_HASH_FILE: ./report_news.hash
 
+# Needed by the final `git push origin main` step that updates report_news.hash.
+permissions:
+  contents: write
+
+# Single-in-flight per branch; safe because the next run rebuilds
+# report_news.hash from the same upstream APIs, so a cancelled run loses no data.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -16,9 +25,7 @@ jobs:
     name: Build And Send
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.GA_WORKFLOW_DEPLOYMENTS_TOKEN }}
+      - uses: actions/checkout@v7
 
       - name: Send the news api message to osscameroon channel
         env:
@@ -29,7 +36,7 @@ jobs:
         run: cat news_feed_message
 
       - name: send contribution report to osscameroon channel
-        uses: appleboy/telegram-action@v0.1.1
+        uses: appleboy/telegram-action@v1.0.1
         with:
           to: ${{ secrets.TELEGRAM_OSSCAMEROON_CHANNEL_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -40,8 +47,8 @@ jobs:
         run: |
           # Count the number of lines from the hash file, if it's greater than 100
           # We remove the top 10 lines hashes from the file
-          [[ $(cat $REPORT_HASH_FILE | wc -l) > 1000 ]] &&\
-          tail -n +990 $REPORT_HASH_FILE > $REPORT_HASH_FILE
+          [[ $(cat $REPORT_HASH_FILE | wc -l) -gt 1000 ]] && \
+          tail -n 990 $REPORT_HASH_FILE > tmp.hash && mv tmp.hash $REPORT_HASH_FILE
 
       - name: Commit list of the articles we have already shared
         shell: bash

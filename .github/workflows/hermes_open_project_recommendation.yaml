@@ -5,6 +5,9 @@ on:
 
 jobs:
   send-message:
+    permissions:
+      contents: read
+
     defaults:
       run:
         working-directory: ./osscameroon-website/bots/hermes
@@ -12,15 +15,17 @@ jobs:
     name: Send message
     runs-on: ubuntu-latest
     steps:
+      # No custom token: relies on osscameroon/osscameroon-website being
+      # reachable by GITHUB_TOKEN (i.e. publicly readable). If the target
+      # ever goes private, reintroduce `token:` here.
       - name: Checkout osscameroon-website
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
         with:
-          token: ${{ secrets.GA_WORKFLOW_DEPLOYMENTS_TOKEN }}
           repository: osscameroon/osscameroon-website
           path: osscameroon-website
 
       - name: Set up Python 3.8
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v6
         with:
           python-version: 3.8
 

@@ -17,7 +17,7 @@ jobs:
     name: notify
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
         with:
           repository: osscameroon/global-github-actions
       - name: notify telegram when pull request is a created
@@ -25,7 +25,7 @@ jobs:
         run: |
           ./build_pull_request_notification.sh $GITHUB_EVENT_PATH > notify_on_pull_request_open_message
       - name: send contribution report to osscameroon channel
-        uses: appleboy/telegram-action@v0.1.1
+        uses: appleboy/telegram-action@v1.0.1
         with:
           to: ${{ secrets.telegram_channel_id }}
           token: ${{ secrets.telegram_token }}

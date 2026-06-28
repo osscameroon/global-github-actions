@@ -4,24 +4,40 @@ All github actions that we run for the entire github organisation
 
 ## Github actions list
 
-- [recommend_yotas_issues](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/notify_on_pull_request_open.yaml)
-    Send a message to the telegram group/channel of OssCameroon for available yotas to earn on some Pulls Requests.
-- [report_contributions](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/notify_on_pull_request_open.yaml)
-    Send the list to the telegram group/channel of OssCameroon for contributions rate per developers in the organisation.
-- [report_number_of_yotas](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/notify_on_pull_request_open.yaml)
-    Send yotas amount per developers in the organisation.
-- [report_opencollective](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/notify_on_pull_request_open.yaml)
-    Send opencollective contributions for donations to the telegram group/channel of OssCameroon.
-- [report_quiz](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/report_a_quiz.yaml)
-    A quiz bot that will print some quiz questions with options in the telegram chat group.
-- [social_media_message_scheduler](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/social_media_message_scheduler.yaml)
-    A github action to schedule messages on twitter, telegram
-- [report_quote](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/report_quotes.yaml)
-    Using a small quote api to return some random programming quote.
-- [report_jobs](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/report_jobs.yaml)
-    Using an open jobs api to fetch some positions and propose that in osscameroon group chat.
+- [hermes_open_project_recommendation](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/hermes_open_project_recommendation.yaml)
+    Daily post of an open-source project recommendation to the OssCameroon Telegram channel and Twitter timeline.
+- [jobsika_social_media_message_scheduler](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/jobsika_social_media_message_scheduler.yaml)
+    Monthly cron that publishes a scheduled message to the Jobsika Twitter account using dedicated credentials.
+- [notify_on_broken_link_detected](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/notify_on_broken_link_detected.yaml)
+    Manually triggerable workflow that scans OssCameroon websites for broken links and reports any failures to Telegram.
+- [notify_on_issue_open](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/notify_on_issue_open.yaml)
+    Reusable workflow that posts a Telegram message whenever a new issue is opened in a consuming repository.
+- [notify_on_pull_request_open](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/notify_on_pull_request_open.yaml)
+    Reusable workflow that posts a Telegram message whenever a new pull request is opened in a consuming repository.
+- [recommend_yotas_issues](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/recommend_yotas_issues.yaml)
+    Sends the list of available yotas issues to the OssCameroon Telegram channel and group, helping newcomers find work.
+- [report_a_quiz](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/report_a_quiz.yaml)
+    Posts programming quiz questions with options to the Telegram group every 10 hours (at least two per day).
+- [report_contributions](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/report_contributions.yaml)
+    Runs monthly (or on manual dispatch) to post the contributions rate per developer in the organisation to the Telegram channel and group.
 - [report_jokes](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/report_jokes.yaml)
-    Using a free joke api to fetch daily some programming jokes.
+    Posts a daily programming joke, fetched from a free joke API, to the Telegram group.
+- [report_jobs](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/report_jobs.yaml)
+    Posts job openings fetched from an open jobs API to the OssCameroon remote-jobs Telegram group every Monday.
+- [report_news](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/report_news.yaml)
+    Posts daily tech news headlines to the Telegram channel, with deduplication via a hash file committed back to the repo.
+- [report_number_of_yotas](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/report_number_of_yotas.yaml)
+    Posts the total count of yotas earned per developer in the organisation to the Telegram channel and group.
+- [report_open_projects](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/report_open_projects.yaml)
+    Posts the list of currently open OssCameroon projects to the Telegram channel and group.
+- [report_opencollective](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/report_opencollective.yaml)
+    Posts OpenCollective contributions and donor info to the Telegram channel and group.
+- [report_quotes](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/report_quotes.yaml)
+    Posts a daily random programming quote, fetched from a small quote API, to the Telegram group.
+- [social_media_message_scheduler](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/social_media_message_scheduler.yaml)
+    Schedules messages from a YAML catalog and publishes them to Twitter and Telegram on Tuesday, Thursday and Saturday.
+- [validate_message_scheduler_messages](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/validate_message_scheduler_messages.yaml)
+    Pull-request validator that ensures the `social_media_message_scheduler` messages stay schema-compliant.
 
 
 ## [notify_on_pull_request_open](https://github.com/osscameroon/global-github-actions/blob/main/.github/workflows/notify_on_pull_request_open.yaml)
