@@ -1,8 +1,11 @@
-import random
+import hashlib
 import json
+import random
 import urllib3
 
-QUOTE_URL = 'https://raw.githubusercontent.com/skolakoda/programming-quotes-api/master/Data/quotes.json'
+# The previous https://raw.githubusercontent.com/skolakoda/programming-quotes-api/master/Data/quotes.json
+# 404s; we now hit ZenQuotes (free, no-auth JSON) and map its shape onto ours.
+QUOTE_URL = 'https://zenquotes.io/api/random'
 
 
 def fetch_quotes() -> list:
@@ -15,7 +18,40 @@ def fetch_quotes() -> list:
     """
     http = urllib3.PoolManager()
     r = http.request('GET', QUOTE_URL)
-    return json.loads(r.data.decode('utf-8'))
+
+    # Raise a clear error on non-2xx so we don't quietly fall through to
+    # json.loads and get a misleading "Extra data" parse error if the API
+    # returns plain text like "404: Not Found".
+    if r.status != 200:
+        raise RuntimeError(
+            f'Failed to fetch quote from {QUOTE_URL}: '
+            f'HTTP {r.status} — {r.data.decode("utf-8", errors="replace").strip()}'
+        )
+
+    try:
+        data = json.loads(r.data.decode('utf-8'))
+    except json.JSONDecodeError as exc:
+        raise RuntimeError(
+            f'Failed to parse quote API response as JSON from {QUOTE_URL}: '
+            f'{r.data.decode("utf-8", errors="replace").strip()}'
+        ) from exc
+
+    # Some endpoints wrap the quote; normalise to a list of dicts.
+    if isinstance(data, dict):
+        data = [data]
+
+    # ZenQuotes returns a list of {'q': text, 'a': author, 'h': html, ...}; map
+    # it into the {en, author, id} shape that validate_quote/render_quote use.
+    return [
+        {
+            'en': item.get('q'),
+            'author': item.get('a'),
+            'id': hashlib.sha1(
+                f"{item.get('q', '')}|{item.get('a', '')}".encode('utf-8')
+            ).hexdigest(),
+        }
+        for item in data
+    ]
 
 
 def validate_quote(quote: dict) -> None:
