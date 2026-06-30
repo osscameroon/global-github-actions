@@ -152,11 +152,13 @@ def build_news() -> Iterable:
     We build news
     """
     result = {}
-    news = fetch_tech_crunch() + fetch_tech_griot() +  fetch_peef()
+    tech_crunch_news = fetch_tech_crunch()
+    tech_griot_news = fetch_tech_griot()
+    peef_news = fetch_peef()
+    weights = ((1,)*len(tech_crunch_news) + (2,)*len(tech_griot_news) + (2,)*len(peef_news))
+    news = random.choices(tech_crunch_news + tech_griot_news + peef_news, k=len(weights), weights=weights)
     # we extract hashes from the file as a dict
     hashes = extract_hash()
-    # From each iteration, we shuffle
-    random.shuffle(news)
 
     max_iterations = MAX_ARTICLES
     while max_iterations > 0:
