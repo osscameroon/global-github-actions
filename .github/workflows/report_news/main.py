@@ -155,8 +155,8 @@ def build_news() -> Iterable:
     tech_crunch_news = fetch_tech_crunch()
     tech_griot_news = fetch_tech_griot()
     peef_news = fetch_peef()
-    cum_weights = ((1,)*len(tech_crunch_news) + (2,)*len(tech_griot_news) + (2,)*len(peef_news))
-    news = random.choices(tech_crunch_news + tech_griot_news + peef_news, k=len(cum_weights), weights=cum_weights)
+    weights = ((1,)*len(tech_crunch_news) + (2,)*len(tech_griot_news) + (2,)*len(peef_news))
+    news = random.choices(tech_crunch_news + tech_griot_news + peef_news, k=len(weights), weights=weights)
     # we extract hashes from the file as a dict
     hashes = extract_hash()
 
