@@ -152,7 +152,7 @@ def build_news() -> Iterable:
     We build news
     """
     result = {}
-    tech_crunch_news = []#fetch_tech_crunch()
+    tech_crunch_news = fetch_tech_crunch()
     tech_griot_news = fetch_tech_griot()
     peef_news = fetch_peef()
     cum_weights = ((1,)*len(tech_crunch_news) + (2,)*len(tech_griot_news) + (2,)*len(peef_news))
