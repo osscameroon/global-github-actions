@@ -8,6 +8,7 @@ from urllib.request import urlopen
 from urllib.error import HTTPError
 from urllib.parse import quote as urlquote
 import xml.etree.ElementTree as ET
+import sys
 
 
 TECH_GRIOT_API_URL = 'https://techgriot.co/feed'
@@ -140,10 +141,11 @@ def fetch_peef():
         pub_date = lastmod.text
 
         # A peef article in under the form https://peef.dev/post/<author>/<slug>
-        if not link.startswith("https://peef.dev/post/") or link.strip("/").count("/") != 5:
+        if not link.startswith("https://peef.dev/blog/"):
             continue
 
-        author, title = link.split("/")[4:6]
+        author = "peef.dev"
+        title = link.split("/")[-1]
         title = title.replace('-', ' ').capitalize()
 
         try:
@@ -151,9 +153,9 @@ def fetch_peef():
                 body = response.read().decode()
             
             # Parse the HTML data
-            description = re.findall(r"<article.*?>(.*?)</article>", body.replace('\n', ''))
+            description = re.findall(r"class=\"article-body\">.*?<p>(.*?)</p>", body.replace('\n', ''))
             if not description:
-                print("Error: Unable to parse the article", file=sys.stderr)
+                print(f"Error: Unable to parse the article at {link}", file=sys.stderr)
                 continue
 
             description = description[0]
@@ -206,11 +208,14 @@ def build_news() -> Iterable:
     We build news
     """
     result = {}
-    news = fetch_tech_crunch() + fetch_tech_griot() + fetch_tericcabrel_blog() + fetch_peef()
+    tech_crunch_news = fetch_tech_crunch()
+    tech_griot_news = fetch_tech_griot()
+    peef_news = fetch_peef()
+    teric_news = fetch_tericcabrel_blog()
+    weights = ((1,)*len(tech_crunch_news) + (2,)*len(tech_griot_news) + (2,)*len(peef_news) + (2,)*len(teric_news))
+    news = random.choices(tech_crunch_news + tech_griot_news + peef_news + teric_news, k=len(weights), weights=weights)
     # we extract hashes from the file as a dict
     hashes = extract_hash()
-    # From each iteration, we shuffle
-    random.shuffle(news)
 
     max_iterations = MAX_ARTICLES
     while max_iterations > 0:
