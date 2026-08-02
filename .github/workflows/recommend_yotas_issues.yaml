@@ -5,6 +5,11 @@ on:
 
 jobs:
   build:
+    env:
+      TELEGRAM_SEND_GATE_ENABLED: ${{ vars.TELEGRAM_SEND_GATE_ENABLED || 'true' }}
+      TELEGRAM_SEND_GATE_LOOKBACK_MESSAGES: ${{ vars.TELEGRAM_SEND_GATE_LOOKBACK_MESSAGES || '5' }}
+      TELEGRAM_SEND_GATE_MIN_HUMAN_MESSAGES: ${{ vars.TELEGRAM_SEND_GATE_MIN_HUMAN_MESSAGES || '1' }}
+      TELEGRAM_SEND_GATE_ON_ERROR: ${{ vars.TELEGRAM_SEND_GATE_ON_ERROR || 'skip' }}
     defaults:
       run:
         working-directory: ./.github/workflows/recommend_yotas_issues
@@ -12,11 +17,19 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
       - name: get yotas issues
         shell: bash
         run: |
           GITHUB_TOKEN=${{ secrets.BOT_GITHUB_TOKEN }} ./get_yotas_issues.sh > yotas_issues_message
+
+      - name: check if osscameroon group allows bot posting
+        id: telegram_send_gate_yotas_issues
+        continue-on-error: true
+        env:
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: ./.github/workflows/telegram_send_gate.sh
 
       - name: send custom message with to osscameroon channel
         uses: appleboy/telegram-action@v1.0.1
@@ -26,6 +39,7 @@ jobs:
           message_file: ./.github/workflows/recommend_yotas_issues/yotas_issues_message
 
       - name: send custom message with to osscameroon group
+        if: ${{ steps.telegram_send_gate_yotas_issues.outputs.telegram_send_gate == 'true' }}
         uses: appleboy/telegram-action@v1.0.1
         with:
           to: ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }}
