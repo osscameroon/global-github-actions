@@ -13,14 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout osscameroon-website
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GA_WORKFLOW_DEPLOYMENTS_TOKEN }}
           repository: osscameroon/osscameroon-website
           path: osscameroon-website
 
       - name: Set up Python 3.8
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v5
         with:
           python-version: 3.8
 
