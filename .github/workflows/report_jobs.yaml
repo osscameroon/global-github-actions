@@ -28,11 +28,10 @@ jobs:
 
       - name: check if remotejobs group allows bot posting
         id: telegram_send_gate_jobs
-        continue-on-error: true
         env:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_REMOTEJOBS_GROUP_ID }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        run: ./.github/workflows/telegram_send_gate.sh
+        run: "$GITHUB_WORKSPACE/.github/workflows/telegram_send_gate.sh"
 
       - name: send jobs report to osscameroon group
         if: ${{ steps.telegram_send_gate_jobs.outputs.telegram_send_gate == 'true' }}

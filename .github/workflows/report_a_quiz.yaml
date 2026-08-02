@@ -22,11 +22,10 @@ jobs:
 
       - name: check if osscameroon group allows bot posting
         id: telegram_send_gate_quiz
-        continue-on-error: true
         env:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_OSSCAMEROON_GROUP_ID }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        run: ./.github/workflows/telegram_send_gate.sh
+        run: "$GITHUB_WORKSPACE/.github/workflows/telegram_send_gate.sh"
 
       - name: Send Quiz message to the channel
         if: ${{ steps.telegram_send_gate_quiz.outputs.telegram_send_gate == 'true' }}

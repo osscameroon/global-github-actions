@@ -45,6 +45,8 @@ All github actions that we run for the entire github organisation
 ### 1) Scheduled workflows (automated)
 
 Most workflows are started automatically by `on.schedule` and do **not** need a manual trigger.
+GitHub evaluates schedules in UTC and only runs the workflow version on the default branch,
+so schedule changes on a pull-request branch take effect only after they are merged into `main`.
 
 - [hermes_open_project_recommendation.yaml](./.github/workflows/hermes_open_project_recommendation.yaml)
 - [jobsika_social_media_message_scheduler.yaml](./.github/workflows/jobsika_social_media_message_scheduler.yaml)
@@ -58,7 +60,8 @@ Most workflows are started automatically by `on.schedule` and do **not** need a 
 - [report_opencollective.yaml](./.github/workflows/report_opencollective.yaml)
 - [report_quotes.yaml](./.github/workflows/report_quotes.yaml)
 - [social_media_message_scheduler.yaml](./.github/workflows/social_media_message_scheduler.yaml)
-- [validate_message_scheduler_messages.yaml](./.github/workflows/validate_message_scheduler_messages.yaml) (runs on pull requests only)
+
+`validate_message_scheduler_messages.yaml` runs on pull requests; it is not scheduled.
 
 ### 2) Manual dispatch workflows
 
@@ -118,13 +121,13 @@ Each workflow’s `run`/script flow usually maps to these local entrypoints:
 ### 5) Telegram group send gate (anti-flood for group chats)
 
 Some group-send workflows now run a preflight check before posting to Telegram groups.
-The check reads the latest messages in the target chat and only allows a new bot message
-when there is at least one human-authored message in that sample.
+The check only allows a new bot message when Telegram has delivered at least one
+human-authored update for that group in the sampled updates.
 
 Behavior:
 
 - Fetches recent updates from `getUpdates` for the target group chat.
-- Restricts sampling to the last `N` messages in that chat.
+- Restricts sampling to the last `N` received updates in that chat.
 - Counts how many of those messages are from non-bot users.
 - Sends only if the non-bot count is greater or equal to a minimum threshold.
 
@@ -137,6 +140,14 @@ Configuration is done with repository/organization variables (optional):
 
 `skip` on error means the bot is blocked and the message is not sent.
 `allow` on error means the message is sent if Telegram API/dep checks fail.
+
+Important: Telegram's Bot API does not provide a chat-history endpoint. This gate can
+only inspect updates delivered to the bot, not independently retrieve the exact latest
+messages visible in the group. For useful results, the bot must receive group messages
+(for example, privacy mode disabled or the bot configured with the necessary access),
+and no separate webhook/update consumer should drain those updates. If an exact
+chat-history policy is required, use a dedicated Telegram client/service with explicit
+history-read access instead of a bot-token-only workflow.
 
 Script reference:
 

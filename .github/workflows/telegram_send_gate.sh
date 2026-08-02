@@ -27,6 +27,15 @@ write_outputs() {
   fi
 }
 
+skip_send() {
+  local reason=$1
+  local human_count=${2:-0}
+  local sampled_count=${3:-0}
+
+  write_outputs false "$reason" "$human_count" "$sampled_count"
+  exit 0
+}
+
 if [[ "${TELEGRAM_SEND_GATE_ENABLED,,}" != "true" ]]; then
   log "Send gate disabled; allowing send."
   write_outputs true disabled 0 0
@@ -35,14 +44,12 @@ fi
 
 if [[ -z "${TELEGRAM_CHAT_ID:-}" ]]; then
   log "Missing TELEGRAM_CHAT_ID."
-  write_outputs false missing_chat_id 0 0
-  exit 1
+  skip_send missing_chat_id
 fi
 
 if [[ -z "${TELEGRAM_BOT_TOKEN:-}" ]]; then
   log "Missing TELEGRAM_BOT_TOKEN."
-  write_outputs false missing_bot_token 0 0
-  exit 1
+  skip_send missing_bot_token
 fi
 
 if ! command -v jq >/dev/null 2>&1; then
@@ -52,20 +59,17 @@ if ! command -v jq >/dev/null 2>&1; then
     exit 0
   fi
 
-  write_outputs false missing_dependency_jq_fail 0 0
-  exit 1
+  skip_send missing_dependency_jq_skip
 fi
 
 if ! [[ "$TELEGRAM_SEND_GATE_LOOKBACK_MESSAGES" =~ ^[0-9]+$ ]] || (( TELEGRAM_SEND_GATE_LOOKBACK_MESSAGES == 0 )); then
   log "Invalid TELEGRAM_SEND_GATE_LOOKBACK_MESSAGES: '$TELEGRAM_SEND_GATE_LOOKBACK_MESSAGES'."
-  write_outputs false invalid_lookback 0 0
-  exit 1
+  skip_send invalid_lookback
 fi
 
 if ! [[ "$TELEGRAM_SEND_GATE_MIN_HUMAN_MESSAGES" =~ ^[0-9]+$ ]]; then
   log "Invalid TELEGRAM_SEND_GATE_MIN_HUMAN_MESSAGES: '$TELEGRAM_SEND_GATE_MIN_HUMAN_MESSAGES'."
-  write_outputs false invalid_min_human 0 0
-  exit 1
+  skip_send invalid_min_human
 fi
 
 API_BASE="https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}"
@@ -79,8 +83,7 @@ if (( CURL_CODE != 0 )); then
     write_outputs true api_curl_error_allow 0 0
     exit 0
   fi
-  write_outputs false api_curl_error_skip 0 0
-  exit 1
+  skip_send api_curl_error_skip
 fi
 
 if [[ -z "$RESP" ]]; then
@@ -90,8 +93,7 @@ if [[ -z "$RESP" ]]; then
     exit 0
   fi
 
-  write_outputs false api_empty_skip 0 0
-  exit 1
+  skip_send api_empty_skip
 fi
 
 if ! echo "$RESP" | jq -e '.ok == true' >/dev/null 2>&1; then
@@ -102,8 +104,7 @@ if ! echo "$RESP" | jq -e '.ok == true' >/dev/null 2>&1; then
     exit 0
   fi
 
-  write_outputs false api_error_skip 0 0
-  exit 1
+  skip_send api_error_skip
 fi
 
 CHAT_MESSAGES=$(echo "$RESP" | jq --arg chat_id "$TELEGRAM_CHAT_ID" --argjson lookback "$TELEGRAM_SEND_GATE_LOOKBACK_MESSAGES" '
@@ -130,6 +131,4 @@ if (( HUMAN_COUNT >= TELEGRAM_SEND_GATE_MIN_HUMAN_MESSAGES )); then
 fi
 
 log "Blocked. Checked ${SAMPLED_COUNT} recent update(s), found ${HUMAN_COUNT} human message(s) (minimum required: ${TELEGRAM_SEND_GATE_MIN_HUMAN_MESSAGES})."
-write_outputs false human_presence_low "$HUMAN_COUNT" "$SAMPLED_COUNT"
-
-exit 1
+skip_send human_presence_low "$HUMAN_COUNT" "$SAMPLED_COUNT"
