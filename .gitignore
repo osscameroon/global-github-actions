@@ -20,3 +20,4 @@
 .buildlog/
 .history
 .svn/
+.github/workflows/recommend_yotas_issues/opened_issues.json
