@@ -1,7 +1,8 @@
 name: telegram recommend yotas issues
-on: workflow_dispatch
-
-
+on:
+  push:
+    branches:
+      - elhmn-test-1
 
 jobs:
   build:
