@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -xe
 
 #get_org_unarchived_repos print out organisation list of not archived repositories
 #The list should not contain archived repos like the former repo osscameroon-blog

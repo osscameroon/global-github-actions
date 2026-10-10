@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -xe
 
 ./get_opened_issues.sh > opened_issues.json
 echo "You can contribute to osscameroon’s opensource projects and earn some Yotas
