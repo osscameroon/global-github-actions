@@ -6,9 +6,19 @@ set -e
 #The list should not contain archived repos like the former repo osscameroon-blog
 #After checking GitHub API to list organization repositories(https://docs.github.com/en/rest/repos/repos#list-organization-repositories), we'll filter with the condition archived==false
 #param: organisation name
+#The API returns 30 repos per page by default, so we walk every page, otherwise newer repos are never checked
 get_org_unarchived_repos() {
 	org=$1
-	curl -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.v3+json"  https://api.github.com/orgs/$org/repos 2>/dev/null | jq '.[] | select(.archived == false) | .url' -r
+	page=1
+	while true; do
+		ret=$(curl -sSf -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.v3+json"  https://api.github.com/orgs/$org/repos\?per_page\=100\&page\=$page) || return 1
+		if [[ "$(echo "$ret" | jq 'length')" = "0" ]]; then
+			break
+		fi
+
+		echo "$ret" | jq '.[] | select(.archived == false) | .url' -r
+		((page++))
+	done
 }
 
 #get_repository_issues print out organisation list of repositories
@@ -16,7 +26,12 @@ get_org_unarchived_repos() {
 get_repository_opened_issues() {
 	repo=$1
 	page=$2
-	curl -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.v3+json"  $repo/issues\?state\=open\&per_page\=100\&page\=$page 2>/dev/null | jq 'map(select(.labels[].name | contains("Yotas"))) | map({issue: .html_url, title: .title, author: .user.login, yotas: .labels[] | select( .name | contains("Yotas") ) | .name})'
+	curl -sSf -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github.v3+json"  $repo/issues\?state\=open\&per_page\=100\&page\=$page
+}
+
+#filter_yotas_issues keeps the issues that have a Yotas label
+filter_yotas_issues() {
+	jq 'map(select(.labels[].name | contains("Yotas"))) | map({issue: .html_url, title: .title, author: .user.login, yotas: .labels[] | select( .name | contains("Yotas") ) | .name})'
 }
 
 ORG=osscameroon
@@ -31,14 +46,12 @@ for repo in $REPOSITORIES; do
 # 		echo "page: $page"
 # 		echo "repo: $repo"
 		ret=$(get_repository_opened_issues $repo $page)
-		if [[ -z "$ret" ]]; then
-			break
-		fi
-		if [[ "$ret" = "[]" ]]; then
+		#stop on the first empty page, not on the first page without Yotas issues
+		if [[ "$(echo "$ret" | jq 'length')" = "0" ]]; then
 			break
 		fi
 
-		echo "$ret"
+		echo "$ret" | filter_yotas_issues
 		((page++))
 
 		#sleep to not break the GitHub api limit
